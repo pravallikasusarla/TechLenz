@@ -1,0 +1,342 @@
+.css-3d-scene {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+/* The Smartphone Frame */
+.smartphone-frame {
+  width: 280px;
+  height: 560px;
+  border-radius: 44px;
+  background: linear-gradient(135deg, rgba(255, 236, 230, 0.65), rgba(255, 255, 255, 0.15));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 4px solid rgba(224, 83, 38, 0.6);
+  box-shadow: 
+    0 40px 80px rgba(0, 0, 0, 0.15),
+    inset 0 0 25px rgba(224, 83, 38, 0.25),
+    0 0 50px rgba(224, 83, 38, 0.45);
+  position: relative;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  animation: phoneFloat 8s ease-in-out infinite;
+}
+
+@keyframes phoneFloat {
+  0% { transform: rotateY(-10deg) rotateX(5deg) translateY(0); }
+  50% { transform: rotateY(5deg) rotateX(8deg) translateY(-20px); }
+  100% { transform: rotateY(-10deg) rotateX(5deg) translateY(0); }
+}
+
+/* Inner Screen */
+.smartphone-screen {
+  width: 92%;
+  height: 96%;
+  border-radius: 36px;
+  background: #050505;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Notch */
+.smartphone-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  height: 28px;
+  background: #000;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  z-index: 20;
+}
+
+/* Custom Animated Scenes UI */
+.animated-scenes-feed {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  animation: scrollScenes 25s linear infinite;
+}
+
+@keyframes scrollScenes {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-400%); }
+}
+
+.inner-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at center, #260d03, #000 80%);
+}
+
+.scene-label {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(224, 83, 38, 0.5);
+}
+
+.scene-visual {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 1. Hackathon Code Window */
+.code-window {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(224, 83, 38, 0.05);
+  border: 1px solid rgba(224, 83, 38, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 0 20px rgba(224, 83, 38, 0.1);
+}
+
+.code-line {
+  height: 6px;
+  background: var(--color-accent);
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.code-line.w-70 { width: 70%; animation: typeLine 2s infinite alternate; }
+.code-line.w-40 { width: 40%; animation: typeLine 2.5s infinite alternate-reverse; opacity: 0.5; }
+.code-line.w-90 { width: 90%; animation: typeLine 3s infinite alternate; }
+.code-line.w-50 { width: 50%; opacity: 0.5; }
+
+@keyframes typeLine {
+  0% { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
+}
+
+.cursor-blink {
+  position: relative;
+}
+.cursor-blink::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: -2px;
+  width: 6px;
+  height: 10px;
+  background: #fff;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* 2. Startup Pitches Chart */
+.chart-bars {
+  align-items: flex-end;
+  gap: 10px;
+}
+.bar {
+  width: 15px;
+  background: linear-gradient(to top, var(--color-accent), #ff9e79);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-shadow: 0 0 15px rgba(224, 83, 38, 0.4);
+}
+.bar-1 { height: 30%; animation: growBar 3s ease-in-out infinite alternate; }
+.bar-2 { height: 50%; animation: growBar 3.5s ease-in-out infinite alternate-reverse; }
+.bar-3 { height: 80%; animation: growBar 2.5s ease-in-out infinite alternate; }
+.bar-4 { height: 100%; animation: growBar 4s ease-in-out infinite alternate-reverse; }
+
+@keyframes growBar {
+  0% { transform: scaleY(0.3); transform-origin: bottom; }
+  100% { transform: scaleY(1); transform-origin: bottom; }
+}
+
+/* 3. Live Coverage Camera */
+.camera-focus {
+  border-radius: 50%;
+  border: 1px dashed rgba(224, 83, 38, 0.3);
+  animation: spinSlow 10s linear infinite;
+}
+
+@keyframes spinSlow { 100% { transform: rotate(360deg); } }
+
+.focus-corner {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-color: var(--color-accent);
+  border-style: solid;
+  border-width: 0;
+  animation: pulseFocus 2s ease-in-out infinite alternate;
+}
+.top-left { top: -5px; left: -5px; border-top-width: 3px; border-left-width: 3px; }
+.top-right { top: -5px; right: -5px; border-top-width: 3px; border-right-width: 3px; }
+.bottom-left { bottom: -5px; left: -5px; border-bottom-width: 3px; border-left-width: 3px; }
+.bottom-right { bottom: -5px; right: -5px; border-bottom-width: 3px; border-right-width: 3px; }
+
+@keyframes pulseFocus {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+.recording-dot {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff3333;
+  box-shadow: 0 0 10px #ff3333;
+  animation: blink 1s step-end infinite;
+}
+
+/* 4. Interviews Audio Waves */
+.audio-waves {
+  gap: 8px;
+}
+.wave {
+  width: 8px;
+  height: 20px;
+  background: var(--color-accent);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(224, 83, 38, 0.5);
+  animation: jumpWave 0.6s ease-in-out infinite alternate;
+}
+.wave-1 { animation-delay: 0.1s; }
+.wave-2 { animation-delay: 0.3s; }
+.wave-3 { height: 40px; animation-delay: 0s; }
+.wave-4 { animation-delay: 0.2s; }
+.wave-5 { animation-delay: 0.4s; }
+
+@keyframes jumpWave {
+  0% { transform: scaleY(0.5); }
+  100% { transform: scaleY(2.5); }
+}
+
+.scenes-ui-overlay {
+  position: absolute;
+  bottom: 0; left: 0; width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.overlay-brand {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+
+/* 3. Floating Action Cards (Glitch-Free Architecture) */
+.pop-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  z-index: 10;
+  transform-style: preserve-3d;
+}
+
+/* Play ONCE forwards so they stay out and don't pop back in */
+.pop-card-1 { animation: popOut1 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 1s; }
+.pop-card-2 { animation: popOut2 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 1.5s; }
+.pop-card-3 { animation: popOut3 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 2s; }
+.pop-card-4 { animation: popOut4 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 2.5s; }
+.pop-card-5 { animation: popOut5 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 3s; }
+.pop-card-6 { animation: popOut6 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 3.5s; }
+
+@keyframes popOut1 { 100% { transform: translate(-280px, -200px) translateZ(80px) scale(1); opacity: 1; } }
+@keyframes popOut2 { 100% { transform: translate(140px, -150px) translateZ(60px) scale(1); opacity: 1; } }
+@keyframes popOut3 { 100% { transform: translate(-290px, 0px) translateZ(100px) scale(1); opacity: 1; } }
+@keyframes popOut4 { 100% { transform: translate(150px, 50px) translateZ(70px) scale(1); opacity: 1; } }
+@keyframes popOut5 { 100% { transform: translate(-250px, 180px) translateZ(90px) scale(1); opacity: 1; } }
+@keyframes popOut6 { 100% { transform: translate(120px, 220px) translateZ(50px) scale(1); opacity: 1; } }
+
+/* Inner float animation - Runs infinitely inside the popped wrapper */
+.floating-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 12px 16px;
+  border: 1px solid rgba(224, 83, 38, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 1);
+  animation: floatBounce 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-15px); }
+}
+
+
+/* Stagger inner floats so they don't move together */
+.pop-card-1 .floating-item { animation-delay: 0s; }
+.pop-card-2 .floating-item { animation-delay: -1s; }
+.pop-card-3 .floating-item { animation-delay: -2s; }
+.pop-card-4 .floating-item { animation-delay: -3s; }
+.pop-card-5 .floating-item { animation-delay: -1.5s; }
+.pop-card-6 .floating-item { animation-delay: -2.5s; }
+
+.item-icon-wrapper {
+  margin-bottom: 6px;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,0.15));
+}
+
+.item-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Glowing Orange Spheres (Ambient) */
+.floating-sphere {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff9e79, var(--color-accent));
+  box-shadow: 0 10px 30px rgba(224, 83, 38, 0.6), inset 0 -5px 15px rgba(0,0,0,0.2);
+  z-index: 5;
+  animation: floatSphere 8s ease-in-out infinite alternate;
+}
+
+.sphere-1 { width: 70px; height: 70px; top: 0%; right: 10%; animation-delay: 0s; }
+.sphere-2 { width: 45px; height: 45px; bottom: 0%; left: -5%; animation-delay: -2s; }
+.sphere-3 { width: 35px; height: 35px; top: 40%; left: -10%; background: radial-gradient(circle at 30% 30%, #ffffff, #e0e0e0); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); animation-delay: -5s; }
+
+@keyframes floatSphere {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-40px) scale(1.1); }
+  100% { transform: translateY(0) scale(1); }
+}

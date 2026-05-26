@@ -1,0 +1,262 @@
+.explore-events-section {
+    padding: 100px 0;
+    /* Light orange background as requested */
+    background: #fff9f6; 
+}
+
+.events-filter-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.filter-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.filter-label {
+    width: 80px;
+    flex-shrink: 0;
+    padding-top: 10px;
+    color: #666;
+    font-weight: 600;
+}
+
+/* Search Bar */
+.search-row {
+    position: relative;
+    margin-bottom: 32px;
+    border: 1px solid rgba(224, 83, 38, 0.2);
+    border-radius: 6px;
+    background: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    color: #999;
+    margin-right: 12px;
+}
+
+.events-search-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    color: #111;
+    outline: none;
+}
+
+/* Custom Dropdown styling */
+.custom-dropdown-container {
+    position: relative;
+    width: 240px;
+    font-family: var(--font-sans);
+}
+
+.custom-dropdown-header {
+    background: #fff;
+    border: 1px solid rgba(224, 83, 38, 0.2);
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: #111;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.custom-dropdown-header:hover, .custom-dropdown-header.open {
+    border-color: var(--color-accent);
+}
+
+.dropdown-arrow {
+    font-size: 10px;
+    color: #666;
+    transition: transform 0.2s ease;
+}
+
+.custom-dropdown-header.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-dropdown-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid rgba(224, 83, 38, 0.2);
+    border-radius: 4px;
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.custom-dropdown-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Orange Hover state & Active State */
+.custom-dropdown-item:hover {
+    background: rgba(224, 83, 38, 0.1);
+    color: var(--color-accent);
+}
+
+.custom-dropdown-item.active {
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Pills */
+.filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+}
+
+.filter-pill {
+    background: #fff;
+    border: 1px solid rgba(224, 83, 38, 0.2);
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+    border-color: var(--color-accent);
+}
+
+/* When active, it becomes solid orange */
+.filter-pill.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+    }
+    .filter-label {
+        margin-bottom: 12px;
+        width: 100%;
+    }
+}
+
+/* Custom search query box */
+.custom-search-message-box {
+    margin-top: 30px;
+    background: #fff;
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(224, 83, 38, 0.08);
+    position: relative;
+}
+
+.message-box-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.message-icon {
+    font-size: 20px;
+}
+
+.message-box-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #111;
+    font-family: var(--font-sans);
+    font-weight: 700;
+}
+
+.message-box-description {
+    color: #666;
+    margin: 0 0 16px 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.message-box-input-group {
+    display: flex;
+    gap: 12px;
+}
+
+.message-box-input {
+    flex: 1;
+    border: 1px solid rgba(224, 83, 38, 0.2);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    color: #111;
+    transition: all 0.2s ease;
+}
+
+.message-box-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(224, 83, 38, 0.1);
+}
+
+.message-box-btn {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.message-box-btn:hover {
+    background: #c84119;
+    transform: translateY(-1px);
+}
+
+.message-box-btn:active {
+    transform: translateY(0);
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

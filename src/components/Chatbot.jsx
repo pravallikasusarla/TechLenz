@@ -3,15 +3,6 @@ import './Chatbot.css';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showIntro, setShowIntro] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowIntro(true);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const [messages, setMessages] = useState(() => {
     return [
       createBotMessage(
@@ -61,7 +52,6 @@ const Chatbot = () => {
   // Toggle Chatbot
   const toggleChat = () => {
     setIsOpen(!isOpen);
-    setShowIntro(false);
   };
 
   // Dispatch custom event to open the Enquiry Modal
@@ -220,39 +210,6 @@ const Chatbot = () => {
 
   return (
     <div className="techlenz-chatbot-wrapper">
-      {/* Ask me intro bubble */}
-      {!isOpen && showIntro && (
-        <div className="chatbot-intro-prompt" onClick={toggleChat} style={{ cursor: 'pointer' }}>
-          <p>Ask me! 👋</p>
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowIntro(false);
-            }}
-            style={{
-              position: 'absolute',
-              top: '-8px',
-              right: '-8px',
-              background: '#111',
-              color: '#fff',
-              border: '1.5px solid #fff',
-              borderRadius: '50%',
-              width: '18px',
-              height: '18px',
-              fontSize: '11px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              lineHeight: '1',
-              padding: '0'
-            }}
-            title="Close"
-          >
-            ×
-          </button>
-        </div>
-      )}
 
       {/* Floating Toggle Button */}
       <button 

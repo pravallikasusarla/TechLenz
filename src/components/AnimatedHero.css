@@ -281,6 +281,7 @@
 
 /* Inner float animation - Runs infinitely inside the popped wrapper */
 .floating-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -292,11 +293,32 @@
   border: 1px solid rgba(224, 83, 38, 0.3);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 1);
   animation: floatBounce 4s ease-in-out infinite alternate;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease, 
+              background 0.3s ease;
+}
+
+.floating-item:hover {
+  transform: scale(1.12) rotate(2deg);
+  box-shadow: 0 25px 45px rgba(224, 83, 38, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 1);
+  border-color: rgba(224, 83, 38, 0.9);
+  background: rgba(255, 255, 255, 1);
+  z-index: 20;
+}
+
+.floating-item:active {
+  transform: scale(0.92) rotate(-2deg);
+  box-shadow: 0 5px 12px rgba(224, 83, 38, 0.15), inset 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: rgba(250, 240, 235, 0.96);
+  border-color: rgba(224, 83, 38, 0.5);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 @keyframes floatBounce {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-15px); }
+  0% { top: 0; }
+  100% { top: -15px; }
 }
 
 
@@ -311,6 +333,16 @@
 .item-icon-wrapper {
   margin-bottom: 6px;
   filter: drop-shadow(0 5px 8px rgba(0,0,0,0.15));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.floating-item:hover .item-icon-wrapper {
+  animation: iconPulse 0.5s ease infinite alternate;
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 5px 8px rgba(0,0,0,0.15)); }
+  100% { transform: scale(1.15); filter: drop-shadow(0 10px 15px rgba(224, 83, 38, 0.45)); }
 }
 
 .item-label {

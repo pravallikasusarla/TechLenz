@@ -870,14 +870,26 @@ a.portfolio-item,
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
+    align-items: start;
 }
 
 @media (min-width: 768px) {
-    .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr 2fr; }
+}
+
+.footer-brand-header {
+    height: 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .footer-logo-image {
-    height: 115px;
+    height: 85px;
     object-fit: contain;
     margin-left: -8px;
     display: block;
@@ -889,7 +901,7 @@ a.portfolio-item,
     color: var(--color-text-secondary);
     line-height: 1.6;
     font-size: 0.95rem;
-    margin-top: 12px;
+    margin-top: 0;
     margin-left: 0;
 }
 
@@ -2928,7 +2940,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 
 /* Escape-style giant logo banner */
 .escape-banner {
-  background-color: #ffece6; /* Light orange background */
+  background-color: #ffffff; /* White background as requested */
   padding: 24px 20px; /* Slim ribbon vertical ratio */
   display: flex;
   justify-content: center;
@@ -2966,3 +2978,27 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 
+/* ==========================================================================
+   Scroll-Triggered Animations (used by IntersectionObserver in App.jsx)
+   ========================================================================== */
+.animate-slide-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition:
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-down {
+    opacity: 0;
+    transform: translateY(-36px);
+    transition:
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-up.is-visible,
+.animate-slide-down.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

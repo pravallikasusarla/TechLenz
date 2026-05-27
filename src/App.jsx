@@ -110,7 +110,7 @@ function App() {
 
     // Give a short delay to allow components to mount
     const animTimeout = setTimeout(() => {
-      const animateElements = document.querySelectorAll('[class*="animate-"], .step-card, .cta-box, .portfolio-item');
+      const animateElements = document.querySelectorAll('section, [class*="animate-"], .step-card, .cta-box, .portfolio-item');
       
       animateElements.forEach((el, index) => {
         // Add a base animate class if they don't have one

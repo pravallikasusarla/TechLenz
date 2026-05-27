@@ -6,8 +6,10 @@ const Footer = () => {
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <img src="/logo1.png?v=1" alt="TechLenz Logo" className="footer-logo-image zoom-logo" />
-          <p className="footer-desc mt-4">
+          <div className="footer-brand-header">
+            <img src="/logo1.png?v=1" alt="TechLenz Logo" className="footer-logo-image zoom-logo" />
+          </div>
+          <p className="footer-desc">
             <span className="footer-desc-highlight">Capture. Build. Deliver.</span>
             <br/>End-to-End tech launch coverage with EOD delivery.
           </p>

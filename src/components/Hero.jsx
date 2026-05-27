@@ -1,6 +1,33 @@
 import React, { useEffect, useRef } from 'react';
 import './AnimatedHero.css';
 
+const HeroBackgroundAnimation = () => (
+  <div className="hero-bg-animation">
+    <div className="hero-bg-grid"></div>
+    
+    <div className="camera-focus-element focus-1">
+      <div className="c-corner tl"></div><div className="c-corner tr"></div>
+      <div className="c-corner bl"></div><div className="c-corner br"></div>
+    </div>
+    
+    <div className="camera-focus-element focus-2">
+      <div className="c-corner tl"></div><div className="c-corner tr"></div>
+      <div className="c-corner bl"></div><div className="c-corner br"></div>
+    </div>
+
+    <div className="crosshair ch-1">+</div>
+    <div className="crosshair ch-2">+</div>
+    <div className="crosshair ch-3">+</div>
+    
+    <div className="orb orb-1"></div>
+    <div className="orb orb-2"></div>
+    
+    <div className="rec-indicator">
+      <span className="rec-dot"></span> REC
+    </div>
+  </div>
+);
+
 const Hero = () => {
   const feedRef = useRef(null);
 
@@ -31,9 +58,10 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero" id="home" style={{background: 'radial-gradient(circle at 15% 50%, rgba(224, 83, 38, 0.08) 0%, #fff 60%)', position: 'relative', overflow: 'hidden'}}>
-
+    <section className="hero" id="home" style={{background: '#ffffff', position: 'relative', overflow: 'hidden'}}>
       
+      <HeroBackgroundAnimation />
+
       <div className="container hero-grid" style={{position: 'relative', zIndex: 1}}>
         <div className="hero-content">
           <h1 className="hero-title">

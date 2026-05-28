@@ -204,11 +204,11 @@ function App() {
       )}
 
       <Footer />
-      <section className="escape-banner">
+      <div className="escape-banner">
         <div className="escape-logo-container">
           <img src="/logo3.png?v=1" alt="TechLenz Logo" className="escape-logo-img" />
         </div>
-      </section>
+      </div>
       <EnquiryModal />
       <Chatbot />
     </>

@@ -34,7 +34,7 @@ const reasons = [
     color: '#f6a623',
     title: 'Platform-Ready Content',
     description:
-      'Every deliverable is optimised for Instagram Reels, LinkedIn, and YouTube which arecorrectly cropped, captioned, and branded so you can post immediately.',
+      'Every deliverable is optimised for Instagram Reels, LinkedIn, and YouTube which are correctly cropped, captioned, and branded so you can post immediately.',
   },
   {
     icon: (

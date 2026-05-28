@@ -34,7 +34,7 @@ const reasons = [
     color: '#f6a623',
     title: 'Platform-Ready Content',
     description:
-      'Every deliverable is optimised for Instagram Reels, LinkedIn, and YouTube — correctly cropped, captioned, and branded so you can post immediately.',
+      'Every deliverable is optimised for Instagram Reels, LinkedIn, and YouTube which arecorrectly cropped, captioned, and branded so you can post immediately.',
   },
   {
     icon: (
@@ -48,7 +48,7 @@ const reasons = [
     color: '#27c93f',
     title: 'Founder-First Approach',
     description:
-      'You focus on your launch. We handle the entire production pipeline — from on-site capture to final edit — with zero creative overhead on your side.',
+      'You focus on your launch. We handle the entire production pipeline from on-site capture to final edit  with zero creative overhead on your side.',
   },
   {
     icon: (
@@ -61,7 +61,7 @@ const reasons = [
     color: '#a770ef',
     title: 'End-to-End Coverage',
     description:
-      'From the opening keynote to the final round of applause — we capture every milestone so nothing gets missed, and every reel tells the full story.',
+      'From the opening keynote to the final round of applause, we capture every milestone so nothing gets missed, and every reel tells the full story.',
   },
   {
     icon: (

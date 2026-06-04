@@ -1,0 +1,310 @@
+/* ==========================================================================
+   Our Clients Section – Infinite Scrolling Marquee
+   ========================================================================== */
+
+.our-clients-section {
+  padding: 60px 0;
+  background-color: #fff9f6; /* Beautiful soft warm light orange/cream matching Process section */
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(224, 83, 38, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(224, 83, 38, 0.05) 0%, transparent 50%);
+  border-top: 1px solid rgba(224, 83, 38, 0.06);
+  border-bottom: 1px solid rgba(224, 83, 38, 0.06);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ---- Horizontal Tech Grid Background ---- */
+.collabs-bg-network {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.collabs-bg-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.collabs-line {
+  stroke: rgba(224, 83, 38, 0.03); /* very faint baseline */
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 80 800; /* light flowing pulse */
+  animation: lineFlowPulse 10s linear infinite;
+}
+
+.collabs-line-1 {
+  animation-duration: 9s;
+  animation-delay: 0s;
+}
+
+.collabs-line-2 {
+  animation-duration: 13s;
+  animation-delay: -2s;
+  animation-direction: reverse; /* flows in opposite direction */
+}
+
+.collabs-line-3 {
+  animation-duration: 11s;
+  animation-delay: -5s;
+}
+
+@keyframes lineFlowPulse {
+  0% {
+    stroke-dashoffset: 880;
+    stroke: rgba(224, 83, 38, 0.03);
+  }
+  50% {
+    stroke: rgba(224, 83, 38, 0.16); /* glows in the center */
+  }
+  100% {
+    stroke-dashoffset: -880;
+    stroke: rgba(224, 83, 38, 0.03);
+  }
+}
+
+.collabs-node {
+  fill: var(--color-accent, #e05326);
+  opacity: 0.12;
+  transition: opacity 0.5s ease;
+  animation: nodeGlowPulse 4s ease-in-out infinite alternate;
+}
+
+/* Offset animation timing for organic pulsing */
+.node-1 { animation-delay: 0s; }
+.node-2 { animation-delay: -0.8s; }
+.node-3 { animation-delay: -1.6s; }
+.node-4 { animation-delay: -2.4s; }
+.node-5 { animation-delay: -3.2s; }
+
+@keyframes nodeGlowPulse {
+  0% {
+    r: 2;
+    opacity: 0.08;
+  }
+  100% {
+    r: 4;
+    opacity: 0.22;
+    filter: drop-shadow(0 0 4px rgba(224, 83, 38, 0.4));
+  }
+}
+
+/* ---- Header ---- */
+.clients-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.clients-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: rgba(224, 83, 38, 0.08);
+  border: 1px solid rgba(224, 83, 38, 0.2);
+  padding: 5px 16px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+
+.clients-title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+
+.clients-title-accent {
+  color: var(--color-accent);
+  position: relative;
+}
+
+/* underline squiggle */
+.clients-title-accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent) 0%, rgba(224, 83, 38, 0.25) 100%);
+  border-radius: 100px;
+}
+
+/* hide decorative underline under "Collabs" as requested */
+.clients-title-accent::after { display: none; }
+
+.clients-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ---- Marquee Wrapper ---- */
+.clients-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+  z-index: 2;
+}
+
+/* Soft fade edges */
+.clients-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.clients-fade-left {
+  left: 0;
+  background: linear-gradient(to right, #fff9f6 0%, transparent 100%);
+}
+
+.clients-fade-right {
+  right: 0;
+  background: linear-gradient(to left, #fff9f6 0%, transparent 100%);
+}
+
+/* ---- The moving track ---- */
+.clients-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  animation: clients-scroll 20s linear infinite;
+  padding: 20px 0;
+  will-change: transform;
+}
+
+.clients-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes clients-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- Logo Card ---- */
+.clients-logo-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 3px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  padding: 12px 24px;
+  min-width: 160px;
+  height: 74px;
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.clients-logo-card::before {
+  content: '';
+  display: none;
+}
+
+.clients-logo-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.12);
+  border-color: rgba(15, 23, 42, 0.18);
+}
+
+/* Logo images – shown in full colour */
+.clients-logo-img {
+  height: 38px;
+  max-width: 130px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  user-select: none;
+  /* Remove default browser drag highlight */
+  -webkit-user-drag: none;
+}
+
+/* Subtle scale on hover for the image itself */
+.clients-logo-card:hover .clients-logo-img {
+  transform: scale(1.06);
+}
+
+/* Selected state (clicked) — show orange border only when selected */
+.clients-logo-card.selected {
+  border: 5px solid var(--color-accent) !important;
+  background: rgba(224, 83, 38, 0.08);
+  box-shadow: 0 0 0 5px rgba(224, 83, 38, 0.2), 0 28px 70px rgba(224, 83, 38, 0.18);
+  transform: scale(1.04);
+  animation: selectedPulse 0.35s ease forwards;
+}
+
+@keyframes selectedPulse {
+  0% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 2px rgba(224, 83, 38, 0.12), 0 10px 20px rgba(224, 83, 38, 0.14);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 8px rgba(224, 83, 38, 0.25), 0 28px 70px rgba(224, 83, 38, 0.24);
+  }
+  100% {
+    transform: scale(1.04);
+    box-shadow: 0 0 0 5px rgba(224, 83, 38, 0.2), 0 28px 70px rgba(224, 83, 38, 0.18);
+  }
+}
+
+/* Zoom SkillArion a little bit so it is more visible */
+.clients-logo-card.skillarion-card .clients-logo-img {
+  transform: scale(1.28);
+}
+
+.clients-logo-card.skillarion-card:hover .clients-logo-img {
+  transform: scale(1.36);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .our-clients-section {
+    padding: 40px 0;
+  }
+
+  .clients-logo-card {
+    min-width: 130px;
+    height: 60px;
+    padding: 8px 16px;
+    border-radius: 12px;
+  }
+
+  .clients-logo-img {
+    height: 28px;
+    max-width: 100px;
+  }
+
+  .clients-fade {
+    width: 60px;
+  }
+}

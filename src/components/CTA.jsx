@@ -1,21 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './BookingCalendar.css';
+
+const timezones = [
+  { label: 'GMT-10:00 Pacific/Honolulu (GMT-10)', offset: -10 },
+  { label: 'GMT-09:00 America/Anchorage (GMT-9)', offset: -9 },
+  { label: 'GMT-08:00 America/Los_Angeles (GMT-8)', offset: -8 },
+  { label: 'GMT-07:00 America/Denver (GMT-7)', offset: -7 },
+  { label: 'GMT-06:00 America/Chicago (GMT-6)', offset: -6 },
+  { label: 'GMT-05:00 America/New_York (GMT-5)', offset: -5 },
+  { label: 'GMT-03:00 America/Sao_Paulo (GMT-3)', offset: -3 },
+  { label: 'GMT+00:00 Europe/London (GMT+0)', offset: 0 },
+  { label: 'GMT+01:00 Europe/Paris (GMT+1)', offset: 1 },
+  { label: 'GMT+02:00 Africa/Cairo (GMT+2)', offset: 2 },
+  { label: 'GMT+03:00 Europe/Moscow (GMT+3)', offset: 3 },
+  { label: 'GMT+04:00 Asia/Dubai (GMT+4)', offset: 4 },
+  { label: 'GMT+05:00 Asia/Karachi (GMT+5)', offset: 5 },
+  { label: 'GMT+05:30 Asia/Kolkata (GMT+5:30)', offset: 5.5 },
+  { label: 'GMT+05:45 Asia/Kathmandu (GMT+5:45)', offset: 5.75 },
+  { label: 'GMT+06:00 Asia/Dhaka (GMT+6)', offset: 6 },
+  { label: 'GMT+06:30 Asia/Rangoon (GMT+6:30)', offset: 6.5 },
+  { label: 'GMT+07:00 Asia/Bangkok (GMT+7)', offset: 7 },
+  { label: 'GMT+08:00 Asia/Singapore (GMT+8)', offset: 8 },
+  { label: 'GMT+09:00 Asia/Tokyo (GMT+9)', offset: 9 },
+  { label: 'GMT+10:00 Australia/Sydney (GMT+10)', offset: 10 },
+  { label: 'GMT+11:00 Pacific/Noumea (GMT+11)', offset: 11 },
+  { label: 'GMT+12:00 Pacific/Auckland (GMT+12)', offset: 12 },
+];
+
+const availableSessions = [
+  'Morning Session (9 AM - 12 PM)',
+  'Afternoon Session (1 PM - 4 PM)',
+  'Evening Session (6 PM - 9 PM)'
+];
+
+const getTodayStr = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+};
 
 const CTA = () => {
   const [bookingStep, setBookingStep] = useState('booking'); // 'booking', 'success'
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState(getTodayStr());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
   const [founderName, setFounderName] = useState('');
   const [startupName, setStartupName] = useState('');
   const [contactHandle, setContactHandle] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [bookingType, setBookingType] = useState('event'); // 'event' or 'other'
+  const [bookingType, setBookingType] = useState('event'); // 'event' or 'volunteer'
 
-  // Pre-seed some booked slot combinations to show validation immediately (e.g. today's Evening Session)
-  const todayStr = new Date().toLocaleDateString('sv-SE');
+  // Calendar States
+  const [currentMonth, setCurrentMonth] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
+  const [selectedTimezone, setSelectedTimezone] = useState(timezones[13]); // Default Kolkata (index 13)
+  const [isTimezoneOpen, setIsTimezoneOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Keep current time ticking for the timezone dropdown
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000); // update every minute
+    return () => clearInterval(timer);
+  }, []);
+
+  // Pre-seed some booked slot combinations to show validation immediately
+  const todayStr = getTodayStr();
   const [bookedSlots, setBookedSlots] = useState([
-    { date: '2026-05-23', session: 'Evening Session (6 PM - 9 PM)' },
-    { date: todayStr, session: 'Evening Session (6 PM - 9 PM)' }
+    { date: '2026-05-23', session: '08:00 PM' },
+    { date: todayStr, session: '06:00 PM' }
   ]);
 
   // Real-time check if the current slot combination is already booked
@@ -27,8 +76,7 @@ const CTA = () => {
     e.preventDefault();
     if (isSlotBooked) return; // Prevent double booking
 
-    if (founderName.trim() && startupName.trim() && contactHandle.trim() && selectedDate.trim() && selectedTimeSlot.trim()) {
-      // Lock in the new slot client-side
+    if (founderName.trim() && startupName.trim() && contactHandle.trim() && selectedDate.trim() && selectedTimeSlot.trim() && selectedTimezone) {
       setBookedSlots([...bookedSlots, { date: selectedDate, session: selectedTimeSlot }]);
       setBookingStep('success');
     }
@@ -36,100 +84,171 @@ const CTA = () => {
 
   const resetBooking = () => {
     setBookingStep('booking');
-    setSelectedDate('');
+    setSelectedDate(getTodayStr());
     setSelectedTimeSlot('');
+    setSelectedTimezone(timezones[13]);
     setFounderName('');
     setStartupName('');
     setContactHandle('');
     setAdditionalInfo('');
-    setIsDropdownOpen(false);
     setBookingType('event');
   };
 
+  // Calendar Helpers
+  const nextMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+  const prevMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
+
+  const formatTimeForOffset = (offsetHours) => {
+    const utc = currentTime.getTime() + (currentTime.getTimezoneOffset() * 60000);
+    const tzDate = new Date(utc + (3600000 * offsetHours));
+    return tzDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
+  const getDaysArray = () => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const startOffset = firstDay === 0 ? 6 : firstDay - 1; // Mon=0, Sun=6
+
+    const days = Array(startOffset).fill(null);
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(i);
+    }
+    return days;
+  };
+
+  const handleDateClick = (day) => {
+    if (!day) return;
+    const dateStr = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+    // Optional: Prevent past dates
+    const selectedDateObj = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (selectedDateObj < today) return;
+
+    setSelectedDate(dateStr);
+  };
+
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
   return (
     <section className="final-cta" id="book-slot">
-
-      
       <div className="container">
         <div className="cta-box animate-scale-in">
           {bookingStep === 'booking' && (
             <div className="booking-console">
 
               <div className="booking-console-header" style={{ textAlign: 'left' }}>
-                <h2>Ready to Showcase your <span className="text-accent">Tech Event</span>?</h2>
-                <p style={{ margin: '0 0 40px 0', maxWidth: '580px' }}>Register for your exclusive EOD launch coverage slot or any other tech event directly to our production crew.</p>
+                <h2>Showcase your <span className="text-accent">Event or Volunteer</span> with us.</h2>
+                <p style={{ margin: '0 0 40px 0', maxWidth: '580px' }}>Register for your exclusive EOD launch coverage slot, or sign up to volunteer and join our production crew.</p>
               </div>
 
               <form onSubmit={handleBookingSubmit} className="booking-grid-form">
                 <div className="booking-grid">
+
                   {/* Date & Time Selectors */}
                   <div className="booking-selectors">
-                    <div className="booking-header-inline">
-                      <h3>1. Select Slot</h3>
-                    </div>
-                    
-                    <div className="form-field-group mt-4">
-                      <label htmlFor="launch-date"></label>
-                      <input
-                        id="launch-date"
-                        type="date"
-                        value={selectedDate}
-                        onChange={(e) => setSelectedDate(e.target.value)}
-                        min={todayStr}
-                        required
-                      />
+                    <div className="booking-header-inline mb-4">
+                      <h3>1. Select Date & Time <span className="required-star">*</span></h3>
                     </div>
 
-                    <div className="form-field-group mt-6">
-                      <label htmlFor="launch-time">Preferred Session</label>
-                      <input type="hidden" value={selectedTimeSlot} required />
-                      <div className="custom-dropdown-container">
-                        <div 
-                          className={`custom-dropdown-trigger ${selectedTimeSlot ? 'has-value' : ''} ${isDropdownOpen ? 'active' : ''}`}
-                          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        >
-                          <span>{selectedTimeSlot || "Select a session"}</span>
-                          <svg className={`chevron-icon ${isDropdownOpen ? 'open' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                          </svg>
+                    <input type="hidden" name="selectedTimeSlot" value={selectedTimeSlot} required />
+                    <input type="hidden" name="selectedDate" value={selectedDate} required />
+                    <div className="booking-calendar-container">
+                      <div className="calendar-left-col">
+                        <div className="calendar-header">
+                          <button type="button" className="calendar-nav-btn" onClick={prevMonth}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                          </button>
+                          <span className="calendar-month-year">
+                            {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+                          </span>
+                          <button type="button" className="calendar-nav-btn" onClick={nextMonth}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                          </button>
                         </div>
-                        
-                        {isDropdownOpen && (
-                          <div className="custom-dropdown-options">
-                            <div 
-                              className={`custom-dropdown-option ${selectedTimeSlot === 'Morning Session (9 AM - 12 PM)' ? 'selected' : ''}`}
-                              onClick={() => {
-                                setSelectedTimeSlot('Morning Session (9 AM - 12 PM)');
-                                setIsDropdownOpen(false);
-                              }}
-                            >
-                              Morning Session (9 AM - 12 PM)
-                            </div>
-                            <div 
-                              className={`custom-dropdown-option ${selectedTimeSlot === 'Afternoon Session (1 PM - 4 PM)' ? 'selected' : ''}`}
-                              onClick={() => {
-                                setSelectedTimeSlot('Afternoon Session (1 PM - 4 PM)');
-                                setIsDropdownOpen(false);
-                              }}
-                            >
-                              Afternoon Session (1 PM - 4 PM)
-                            </div>
-                            <div 
-                              className={`custom-dropdown-option ${selectedTimeSlot === 'Evening Session (6 PM - 9 PM)' ? 'selected' : ''}`}
-                              onClick={() => {
-                                setSelectedTimeSlot('Evening Session (6 PM - 9 PM)');
-                                setIsDropdownOpen(false);
-                              }}
-                            >
-                              Evening Session (6 PM - 9 PM)
-                            </div>
+
+                        <div className="calendar-grid">
+                          {dayNames.map(d => (
+                            <div key={d} className="calendar-day-name">{d}</div>
+                          ))}
+
+                          {getDaysArray().map((day, index) => {
+                            const dateStr = day ? `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}` : '';
+                            const isSelected = day && dateStr === selectedDate;
+
+                            let isPast = false;
+                            if (day) {
+                              const dayDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+                              const today = new Date();
+                              today.setHours(0, 0, 0, 0);
+                              if (dayDate < today) isPast = true;
+                            }
+
+                            return (
+                              <div
+                                key={index}
+                                className={`calendar-day ${!day ? 'empty' : ''} ${isSelected ? 'selected' : ''} ${isPast ? 'past' : ''}`}
+                                onClick={() => handleDateClick(day)}
+                              >
+                                {day || ''}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      <div className="calendar-right-col">
+                        {availableSessions.map(session => (
+                          <button
+                            key={session}
+                            type="button"
+                            className={`time-slot-btn ${selectedTimeSlot === session ? 'selected' : ''}`}
+                            onClick={() => setSelectedTimeSlot(session)}
+                          >
+                            {session}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="timezone-wrapper mt-6">
+                      <span className="timezone-label">Time zone</span>
+                      <div className="timezone-dropdown">
+                        <div className={`timezone-trigger ${selectedTimezone ? 'has-value' : ''}`} onClick={() => setIsTimezoneOpen(!isTimezoneOpen)}>
+                          <div className="timezone-info">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <line x1="2" y1="12" x2="22" y2="12"></line>
+                              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            <span>{selectedTimezone ? selectedTimezone.label : "Select a time zone"}</span>
+                          </div>
+                          <svg style={{ transform: isTimezoneOpen ? 'rotate(180deg)' : 'none', transition: '0.2s', width: '16px' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+
+                        {isTimezoneOpen && (
+                          <div className="timezone-options">
+                            {timezones.map((tz, i) => (
+                              <div
+                                key={i}
+                                className={`timezone-option ${selectedTimezone && selectedTimezone.label === tz.label ? 'selected' : ''}`}
+                                onClick={() => { setSelectedTimezone(tz); setIsTimezoneOpen(false); }}
+                              >
+                                <span>{tz.label}</span>
+                                <span className="timezone-time">{formatTimeForOffset(tz.offset)}</span>
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
                     </div>
 
                     {isSlotBooked && (
-                      <div className="slot-warning-badge">
+                      <div className="slot-warning-badge mt-4">
                         <svg className="warning-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                           <circle cx="12" cy="12" r="10"></circle>
                           <line x1="12" y1="8" x2="12" y2="12"></line>
@@ -138,26 +257,15 @@ const CTA = () => {
                         Slot is not available
                       </div>
                     )}
-
-                    <div className="form-field-group mt-6">
-                      <label htmlFor="additional-info">Additional information to be taken care of</label>
-                      <textarea
-                        id="additional-info"
-                        rows="3"
-                        placeholder="Any special requests, launch milestones, or production notes..."
-                        value={additionalInfo}
-                        onChange={(e) => setAdditionalInfo(e.target.value)}
-                      />
-                    </div>
                   </div>
 
                   {/* Form Details */}
                   <div className="booking-details-form">
                     <h3>2. Booking & Coverage Details</h3>
-                    
+
                     <div className="form-field-group">
                       <label>Coverage Type</label>
-                      <div className="coverage-type-toggles">
+                      <div className="toggle-pill-group">
                         <button
                           type="button"
                           className={`toggle-pill ${bookingType === 'event' ? 'active' : ''}`}
@@ -167,17 +275,17 @@ const CTA = () => {
                         </button>
                         <button
                           type="button"
-                          className={`toggle-pill ${bookingType === 'other' ? 'active' : ''}`}
-                          onClick={() => setBookingType('other')}
+                          className={`toggle-pill ${bookingType === 'volunteer' ? 'active' : ''}`}
+                          onClick={() => setBookingType('volunteer')}
                         >
-                          Others
+                          Volunteer
                         </button>
                       </div>
                     </div>
-                    
+
                     <div className="form-field-group">
                       <label htmlFor="founder-name">
-                        {bookingType === 'event' ? 'Organizer / Host Name' : 'Contact Person Name'}
+                        {bookingType === 'event' ? 'Organizer / Host Name' : 'Your Full Name'} <span className="required-star">*</span>
                       </label>
                       <input
                         id="founder-name"
@@ -191,12 +299,12 @@ const CTA = () => {
 
                     <div className="form-field-group">
                       <label htmlFor="startup-name">
-                        {bookingType === 'event' ? 'Event / Conference Name' : 'Project / Event / Topic Name'}
+                        {bookingType === 'event' ? 'Event / Conference Name' : 'Areas of Interest (Editing, Shooting, etc.)'} <span className="required-star">*</span>
                       </label>
                       <input
                         id="startup-name"
                         type="text"
-                        placeholder={bookingType === 'event' ? 'Enter event name' : 'Enter project or event name'}
+                        placeholder={bookingType === 'event' ? 'Enter event name' : 'How would you like to help?'}
                         value={startupName}
                         onChange={(e) => setStartupName(e.target.value)}
                         required
@@ -204,7 +312,7 @@ const CTA = () => {
                     </div>
 
                     <div className="form-field-group">
-                      <label htmlFor="ig-handle">Instagram Handle (For Confirmation)</label>
+                      <label htmlFor="ig-handle">Instagram Handle (For Confirmation) <span className="required-star">*</span></label>
                       <input
                         id="ig-handle"
                         type="text"
@@ -215,8 +323,19 @@ const CTA = () => {
                       />
                     </div>
 
-                    <button 
-                      type="submit" 
+                    <div className="form-field-group mt-6">
+                      <label htmlFor="additional-info">Additional information to be taken care of</label>
+                      <textarea
+                        id="additional-info"
+                        rows="3"
+                        placeholder="Any special requests, launch milestones, or production notes..."
+                        value={additionalInfo}
+                        onChange={(e) => setAdditionalInfo(e.target.value)}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
                       className={`btn btn-cta-glow w-full mt-4 ${isSlotBooked ? 'disabled' : ''}`}
                       disabled={isSlotBooked}
                     >
@@ -251,8 +370,12 @@ const CTA = () => {
                 </svg>
               </div>
 
-              <h2>Launch Slot <span className="text-accent">Reserved!</span></h2>
-              <p className="success-sub">Your tech launch viewfinder target has been successfully lock-on.</p>
+              <h2>{bookingType === 'volunteer' ? 'Volunteer Spot' : 'Launch Slot'} <span className="text-accent">Reserved!</span></h2>
+              <p className="success-sub">
+                {bookingType === 'volunteer'
+                  ? 'Your interest to join the TechLenz crew has been locked on.'
+                  : 'Your tech launch viewfinder target has been successfully locked on.'}
+              </p>
 
               <div className="booking-receipt">
                 <div className="receipt-border-top"></div>
@@ -270,11 +393,15 @@ const CTA = () => {
                     <span className="val">{selectedTimeSlot}</span>
                   </div>
                   <div className="receipt-row">
-                    <span className="lbl">{bookingType === 'event' ? 'EVENT' : 'PROJECT/TOPIC'}</span>
+                    <span className="lbl">TIME ZONE</span>
+                    <span className="val">{selectedTimezone.label}</span>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="lbl">{bookingType === 'event' ? 'EVENT' : 'ROLE'}</span>
                     <span className="val">{startupName}</span>
                   </div>
                   <div className="receipt-row">
-                    <span className="lbl">{bookingType === 'event' ? 'ORGANIZER' : 'CONTACT'}</span>
+                    <span className="lbl">{bookingType === 'event' ? 'ORGANIZER' : 'VOLUNTEER'}</span>
                     <span className="val">{founderName}</span>
                   </div>
                   {additionalInfo.trim() && (
@@ -303,3 +430,4 @@ const CTA = () => {
 };
 
 export default CTA;
+

@@ -43,7 +43,6 @@
   transform: scale(1) translateY(0);
 }
 
-/* Modal Header */
 .enquiry-modal-header {
   position: relative;
   background-color: #ffffff;
@@ -66,7 +65,10 @@
   text-transform: uppercase;
 }
 
-/* Close Button */
+.enquiry-modal-header::after {
+  content: none;
+}
+
 .enquiry-modal-close {
   position: absolute;
   right: 18px;
@@ -82,6 +84,76 @@
   justify-content: center;
   transition: all var(--transition-fast, 0.2s);
   border-radius: 50%;
+}
+
+.enquiry-modal-close:hover {
+  color: var(--color-accent, #ff9f43);
+  background-color: rgba(var(--color-accent-rgb), 0.08);
+  transform: translateY(-50%) rotate(90deg);
+}
+
+/* ── Floating "Enquire Now" Side Tab ── */
+@keyframes slideInFromRight {
+  from { transform: translateY(-50%) translateX(100%); opacity: 0; }
+  to   { transform: translateY(-50%) translateX(0);    opacity: 1; }
+}
+
+.enquiry-floating-badge {
+  --color-accent:     #e05326;
+  --color-accent-rgb: 224, 83, 38;
+
+  /* positioning — flush against the right edge */
+  position:  fixed;
+  right:     0;
+  top:       50%;
+  transform: translateY(-50%);
+  z-index:   1999;
+
+  /* tab shape: rounded on the left, flush on the right */
+  border-radius: 8px 0 0 8px;
+  border-left:   3px solid var(--color-accent);
+
+  /* look */
+  background-color: #111111;
+  color:            #ffffff;
+  box-shadow:       -6px 0 28px rgba(0, 0, 0, 0.40),
+                     0   2px  8px rgba(0, 0, 0, 0.20);
+
+  /* vertical text */
+  writing-mode:      vertical-rl;
+  text-orientation:  mixed;
+  /* rotate so text reads bottom → top (natural for a right-side tab) */
+  transform:         translateY(-50%) rotate(180deg);
+
+  /* typography */
+  font-size:      0.78rem;
+  font-weight:    700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-family:    var(--font-sans, sans-serif);
+
+  /* layout */
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  padding:     24px 13px;
+
+  cursor:      pointer;
+  user-select: none;
+  transition:  background-color 0.22s ease,
+               box-shadow       0.22s ease,
+               transform        0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* entrance */
+  animation: slideInFromRight 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both;
+}
+
+.enquiry-floating-badge:hover {
+  background-color: var(--color-accent);
+  /* peek out 6 px from the edge on hover */
+  transform: translateY(-50%) rotate(180deg) translateX(6px);
+  box-shadow: -10px 0 32px rgba(var(--color-accent-rgb), 0.50),
+                0   2px  8px rgba(0, 0, 0, 0.20);
 }
 
 .enquiry-modal-close:hover {
@@ -217,61 +289,27 @@
   cursor: not-allowed;
 }
 
-/* Floating Sidebar Badge */
-.enquiry-floating-badge {
-  --color-accent: #e05326;
-  --color-accent-rgb: 224, 83, 38;
-  position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1999;
-  background-color: #111111;
-  color: #ffffff;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  padding: 20px 10px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  border-right: 3px solid var(--color-accent, #e05326);
-  border-radius: 0 6px 6px 0;
-  cursor: pointer;
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
-  transition: all var(--transition-fast, 0.2s);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.enquiry-floating-badge:hover {
-  background-color: var(--color-accent, #e05326);
-  color: #ffffff;
-  transform: translateY(-50%) translateX(4px);
-  box-shadow: 4px 0 25px rgba(var(--color-accent-rgb), 0.4);
-}
-
+/* live-dot inside the badge */
 .enquiry-badge-dot {
-  width: 6px;
-  height: 6px;
-  background-color: var(--color-accent, #ff9f43);
-  border-radius: 50%;
-  margin-bottom: 4px;
-  animation: pulse-orange 1.8s infinite alternate;
+  width:            7px;
+  height:           7px;
+  background-color: var(--color-accent, #e05326);
+  border-radius:    50%;
+  flex-shrink:      0;
+  animation:        badgeDotPulse 1.8s ease-in-out infinite;
 }
 
 .enquiry-floating-badge:hover .enquiry-badge-dot {
   background-color: #ffffff;
 }
 
-@keyframes pulse-orange {
-  0% {
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(var(--color-accent-rgb), 0.7);
+@keyframes badgeDotPulse {
+  0%, 100% {
+    transform:  scale(0.85);
+    box-shadow: 0 0 0 0   rgba(var(--color-accent-rgb), 0.70);
   }
-  100% {
-    transform: scale(1.2);
+  50% {
+    transform:  scale(1.20);
     box-shadow: 0 0 0 6px rgba(var(--color-accent-rgb), 0);
   }
 }

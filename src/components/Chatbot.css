@@ -12,7 +12,7 @@
   --chatbot-border: #eaeaea;
   
   position: fixed;
-  bottom: 140px;
+  bottom: 24px;
   right: 24px;
   z-index: 1998;
   font-family: var(--font-sans), sans-serif;

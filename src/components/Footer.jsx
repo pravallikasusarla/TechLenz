@@ -141,7 +141,7 @@ const Footer = () => {
             <h4>Explore</h4>
             <a href="#">Home</a>
             <a href="#about">About Us</a>
-            <a href="#services">Services</a>
+            <a href="#explore">Events</a>
             <a href="#process">Our Process</a>
           </div>
 
@@ -149,8 +149,8 @@ const Footer = () => {
           <div className="footer-column animate-slide-up">
             <h4>Participate</h4>
             <a href="#pitch">Pitch Your Startup</a>
-            <a href="#join">Join TechLenz</a>
-            <a href="#pitch">Collaborate</a>
+            <a href="#join">Contact Us</a>
+            <a href="#book-slot">Book your Slot</a>
           </div>
 
           {/* Column 3: Contact */}

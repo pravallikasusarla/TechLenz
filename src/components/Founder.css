@@ -1,0 +1,419 @@
+.founder-section {
+  padding: 100px 0;
+  background-color: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scrolling Watermark Marquee */
+.founder-marquee-bg {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.founder-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: founder-scroll 28s linear infinite;
+}
+
+.founder-marquee-word {
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: rgba(231, 115, 81, 0.09);
+  -webkit-text-stroke: 0;
+  white-space: nowrap;
+  padding-right: 1.5em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+@keyframes founder-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.founder-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(224, 83, 38, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(224, 83, 38, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+}
+
+.founder-sparkle {
+  position: absolute;
+  color: var(--color-accent);
+  opacity: 0.6;
+  z-index: 0;
+  animation: float-pulse 4s ease-in-out infinite alternate;
+}
+
+.fs-1 { top: 20%; left: 10%; font-size: 2rem; animation-delay: 0s; }
+.fs-2 { bottom: 15%; right: 15%; font-size: 1.5rem; animation-delay: 1s; }
+.fs-3 { top: 15%; right: 20%; font-size: 1rem; animation-delay: 2s; }
+
+.founder-floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -150px;
+  animation: slow-drift 10s ease-in-out infinite alternate;
+}
+
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  right: -50px;
+  animation: slow-drift 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes slow-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 30px) scale(1.1); }
+}
+
+@keyframes float-pulse {
+  0% { transform: translateY(0); opacity: 0.3; }
+  100% { transform: translateY(-15px); opacity: 0.8; }
+}
+
+/* Ensure container content is above background */
+.founder-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Crew grid layout */
+.founder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+}
+
+.founder-card {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.founder-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.founder-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(224, 83, 38, 0.25);
+  box-shadow: 0 20px 40px rgba(224, 83, 38, 0.1);
+}
+
+.founder-card:hover::before {
+  opacity: 1;
+}
+
+.founder-lens-container {
+  max-width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden; /* Ensure overlay elements are clipped properly */
+}
+
+/* Viewfinder UI Corners inside Founder Card */
+.founder-lens-container .vf-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(17, 17, 17, 0.7);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.founder-lens-container:hover .vf-corner {
+  border-color: var(--color-accent);
+}
+
+.founder-lens-container .vf-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.founder-lens-container .vf-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.founder-lens-container .vf-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.founder-lens-container .vf-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+/* REC status indicator inside Founder Card */
+.founder-lens-container .vf-rec {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #e02626;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 1.5px;
+  z-index: 5;
+}
+
+.founder-lens-container .rec-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #e02626;
+  border-radius: 50%;
+  animation: blink 1s infinite alternate;
+}
+
+/* Center focus crosshair inside Founder Card */
+.founder-lens-container .vf-focus-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+  color: rgba(17, 17, 17, 0.15);
+  font-weight: 300;
+  z-index: 5;
+  transition: color 0.3s ease;
+}
+
+.founder-lens-container:hover .vf-focus-center {
+  color: var(--color-accent);
+}
+
+/* Ambient orange glow behind the image */
+.founder-image-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 30px;
+}
+
+.founder-image-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 60%);
+  filter: blur(30px);
+  opacity: 0.15;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% { opacity: 0.1; transform: translate(-50%, -50%) scale(0.95); }
+  100% { opacity: 0.25; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.founder-lens-container .founder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.founder-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.founder-name {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin-top: 5px;
+}
+
+.founder-role {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-accent);
+}
+
+.founder-description {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+/* Styling for the placeholder card */
+.placeholder-card {
+  border: 1px dashed rgba(224, 83, 38, 0.3);
+  background: rgba(224, 83, 38, 0.01);
+}
+
+.placeholder-card:hover {
+  border: 1px solid var(--color-accent);
+  background: rgba(224, 83, 38, 0.02);
+}
+
+.placeholder-lens {
+  background: linear-gradient(135deg, rgba(224, 83, 38, 0.02) 0%, rgba(224, 83, 38, 0.05) 100%);
+  border: 1px dashed rgba(224, 83, 38, 0.2);
+  box-shadow: none;
+}
+
+.placeholder-card:hover .placeholder-lens {
+  border-style: solid;
+  border-color: rgba(224, 83, 38, 0.4);
+}
+
+/* Scanner line animation */
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  box-shadow: 0 0 8px var(--color-accent);
+  z-index: 2;
+  animation: scanner-move 4s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes scanner-move {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.placeholder-card .vf-focus-center {
+  opacity: 0.15;
+  transition: all 0.3s ease;
+}
+
+.placeholder-card:hover .vf-focus-center {
+  opacity: 0.5;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* CTA button */
+.founder-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  background: transparent;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  letter-spacing: 0.5px;
+}
+
+.founder-cta-btn:hover {
+  background: var(--color-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.badge-dashed {
+  border: 1px dashed var(--color-accent);
+  background: transparent;
+  color: var(--color-accent);
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .founder-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  /* Center the 3rd card when layout drops to 2 columns */
+  .founder-grid > *:last-child:nth-child(odd) {
+    grid-column: span 2;
+    max-width: 500px;
+    justify-self: center;
+    width: 100%;
+  }
+  
+  .founder-lens-container {
+    max-width: 240px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .founder-grid > *:last-child:nth-child(odd) {
+    grid-column: span 1;
+    max-width: 100%;
+  }
+  
+  .founder-card {
+    padding: 30px 20px;
+  }
+}
+

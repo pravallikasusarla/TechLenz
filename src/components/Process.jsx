@@ -2,7 +2,7 @@ import React from 'react';
 
 const Process = () => {
   return (
-    <section className="how-it-works bg-light" id="coverage">
+    <section className="how-it-works bg-light" id="process">
 
       
       <div className="container">

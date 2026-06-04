@@ -1,5 +1,52 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './AnimatedHero.css';
+
+const TYPING_WORDS = [
+  'Tech Launch',
+  'Investor Room',
+  'Tech Expos',
+  'Hackathons',
+  'Startup Pitches',
+  'Interviews',
+];
+
+const TypingText = () => {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayed, setDisplayed] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = TYPING_WORDS[wordIndex];
+    const speed = isDeleting ? 60 : 100;
+    const fullTyped = displayed === currentWord;
+    const fullyDeleted = displayed === '';
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && fullTyped) {
+        // Pause then start deleting
+        setTimeout(() => setIsDeleting(true), 1500);
+        return;
+      }
+      if (isDeleting && fullyDeleted) {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % TYPING_WORDS.length);
+        return;
+      }
+      setDisplayed(isDeleting
+        ? currentWord.slice(0, displayed.length - 1)
+        : currentWord.slice(0, displayed.length + 1)
+      );
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [displayed, isDeleting, wordIndex]);
+
+  return (
+    <span className="hero-typing-word">
+      {displayed}<span className="hero-typing-cursor">|</span>
+    </span>
+  );
+};
 
 const HeroBackgroundAnimation = () => (
   <div className="hero-bg-animation">
@@ -62,10 +109,12 @@ const Hero = () => {
       
       <HeroBackgroundAnimation />
 
-      <div className="container hero-grid" style={{position: 'relative', zIndex: 1}}>
+      <div className="container hero-grid" style={{position: 'left', zIndex: 1}}>
         <div className="hero-content">
           <h1 className="hero-title">
-            End-to-End Tech Launch <span className="text-accent">Coverage</span>.
+            <span className="hero-line">End-to-End</span>
+            <span className="hero-line"><TypingText /></span>
+            <span className="hero-line"><span className="hero-coverage-black">Coverage.</span></span>
           </h1>
           <p className="hero-subtitle">
             Helping founders and entrepreneurs capture their vision. Pitch your startup or product and get high-quality technical coverage delivered by end of day.
@@ -144,7 +193,6 @@ const Hero = () => {
               </defs>
             </svg>
 
-            {/* Floating Cards with Wrappers (Glitch-free) */}
             <div className="pop-wrapper pop-card-1">
               <div className="floating-item">
                 <div className="item-icon-wrapper">
@@ -213,8 +261,7 @@ const Hero = () => {
                 <span className="item-label">Tech Expos</span>
               </div>
             </div>
-            
-            {/* Glowing Orange Spheres (Removed) */}
+
           </div>
         </div>
       </div>

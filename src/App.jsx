@@ -11,8 +11,10 @@ import PitchYourStartup from './components/PitchYourStartup';
 import Footer from './components/Footer';
 import ExploreEvents from './components/ExploreEvents';
 import JoinTechLenz from './components/JoinTechLenz';
+import OurClients from './components/OurClients';
 import EnquiryModal from './components/EnquiryModal';
 import Chatbot from './components/Chatbot';
+import Founder from './components/Founder';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -194,12 +196,15 @@ function App() {
       ) : (
         <main>
           <Hero />
-          <WhyTechLenz />
+          <About />
           <Process />
+          <WhyTechLenz />
           <Services />
+          <OurClients />
           <ExploreEvents />
           <FAQ />
           <CTA />
+          <Founder />
         </main>
       )}
 

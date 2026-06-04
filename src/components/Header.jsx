@@ -28,13 +28,12 @@ const Header = () => {
         <nav className="nav-links">
           <a href="#about" className="nav-link">About</a>
           <a href="#services" className="nav-link">Our Coverage</a>
-          <a href="#services" className="nav-link">Services</a>
-          <a href="#join" className="nav-link">Join TechLenz</a>
+          <a href="#explore" className="nav-link">Events</a>
           <a href="#pitch" className="nav-link">Pitch Your Startup</a>
         </nav>
         
         <div className="header-actions">
-          <a href="https://www.instagram.com/_techlenz/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">DM for Collab</a>
+          <a href="#join" className="btn btn-primary">Contact Us</a>
         </div>
       </div>
     </header>

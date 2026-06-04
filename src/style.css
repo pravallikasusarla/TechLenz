@@ -255,11 +255,31 @@ body::before {
     align-items: center;
 }
 
+/* Shift container slightly towards left but maintain breathing room */
+.hero .container {
+    margin-left: 10%;
+    padding-left: 0;
+    padding-right: 5%; /* Push phone inwards from the right edge */
+    max-width: 85%;
+}
+
 @media (min-width: 992px) {
     .hero-grid {
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 60px;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 120px;
+        align-items: center;
+        padding-left: 0;
     }
+
+    /* Push the hero text column to start at the left edge of the container */
+    .hero-content {
+        padding-left: 0;
+    }
+}
+
+.hero-content {
+    max-width: 600px;
+    text-align: left;
 }
 
 .badge {
@@ -274,11 +294,50 @@ body::before {
 }
 
 .hero-title {
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.15;
     margin-bottom: 24px;
     letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+}
+.hero-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.1rem);
+    color: var(--color-text-secondary);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+/* Black 'Coverage.' text */
+.hero-coverage-black {
+    color: var(--color-text-primary);
+    display: inline;
+}
+
+/* Each title line forced onto its own row */
+.hero-line {
+    display: block;
+}
+
+/* Orange typing word with blinking cursor */
+.hero-typing-word {
+    color: var(--color-accent);
+    display: inline-block;
+    min-height: 1.15em;
+    white-space: nowrap;
+}
+
+.hero-typing-cursor {
+    display: inline-block;
+    color: var(--color-accent);
+    font-weight: 300;
+    margin-left: 2px;
+    animation: blink-cursor 0.75s step-end infinite;
+}
+
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
 }
 
 .hero-subtitle {
@@ -375,6 +434,10 @@ body::before {
    ========================================================================== */
 .how-it-works, .services {
     padding: 120px 0;
+}
+
+.events {
+    padding: 120px 0 140px;
 }
 
 .section-header {
@@ -2460,8 +2523,15 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     width: 100%;
 }
 
+.toggle-pill-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 .toggle-pill {
     flex: 1;
+    min-width: 140px;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 8px;

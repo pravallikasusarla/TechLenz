@@ -1,0 +1,247 @@
+.booking-calendar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+  .booking-calendar-container {
+    flex-direction: row;
+    gap: 40px;
+  }
+}
+
+.calendar-left-col {
+  flex: 1;
+}
+
+.calendar-right-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.calendar-nav-btn {
+  background: #f0f4f8;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #111;
+  transition: all 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+  background: #e0e6ed;
+}
+
+.calendar-nav-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.calendar-month-year {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-width: 120px;
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.calendar-day-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s;
+  color: #555;
+}
+
+.calendar-day:hover:not(.empty) {
+  background: rgba(224, 83, 38, 0.1);
+  color: var(--color-accent);
+}
+
+.calendar-day.selected {
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.calendar-day.empty {
+  cursor: default;
+}
+
+.calendar-day.past {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.calendar-day.past:hover {
+  background: none;
+  color: #ccc;
+}
+
+/* Time Slots & Timezone buttons */
+.time-slot-btn,
+.timezone-btn {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left; /* Aligned left for timezones */
+}
+
+.time-slot-btn:hover,
+.timezone-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.time-slot-btn.selected,
+.timezone-btn.selected {
+  border-color: var(--color-accent);
+  border-width: 2px;
+  color: var(--color-accent);
+  font-weight: 600;
+  background: rgba(224, 83, 38, 0.03);
+}
+
+/* Timezone selector */
+.timezone-wrapper {
+  margin-top: 40px;
+}
+
+.timezone-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.timezone-dropdown {
+  position: relative;
+  margin-top: 4px;
+}
+
+.timezone-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.timezone-trigger:hover {
+  border-color: #999;
+}
+
+.timezone-trigger.has-value {
+  border-color: var(--color-accent);
+  border-width: 2px;
+  color: var(--color-accent);
+  background: rgba(224, 83, 38, 0.03);
+  font-weight: 600;
+}
+
+.timezone-trigger.has-value svg {
+  color: var(--color-accent);
+}
+
+.timezone-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.95rem;
+}
+
+.timezone-info svg {
+  color: #666;
+}
+
+.timezone-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.timezone-option {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.timezone-option:hover {
+  background: rgba(224, 83, 38, 0.1);
+  color: var(--color-accent);
+}
+
+.timezone-option.selected {
+  background: rgba(224, 83, 38, 0.1);
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.timezone-time {
+  color: #666;
+}
+
+.timezone-option.selected .timezone-time {
+  color: var(--color-accent);
+}

@@ -1,0 +1,316 @@
+/* ==========================================================================
+   About Section - Centered Layout with Background Viewfinder UI
+   ========================================================================== */
+
+.about-section {
+  padding: 120px 0;
+  background: radial-gradient(circle at center, rgba(224, 83, 38, 0.035) 0%, #ffffff 75%);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(224, 83, 38, 0.08);
+  border-bottom: 1px solid rgba(224, 83, 38, 0.08);
+}
+
+/* Container content sits cleanly above background animation */
+.about-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Header centering overrides */
+.about-section .section-header {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+}
+
+.about-section .section-header h2 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  margin-top: 10px;
+}
+
+/* Centered content styling */
+.about-content-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.about-text-content {
+  max-width: 800px;
+  text-align: center; /* Centered text inside the centered layout for professional readability */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-text-content p {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  color: var(--color-text-secondary);
+  line-height: 1.85; /* Luxurious line height for premium feel */
+  font-weight: 400;
+}
+
+/* Centered Stats Grid */
+.about-content-centered .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  width: 100%;
+  max-width: 720px;
+  margin-top: 50px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(224, 83, 38, 0.1);
+}
+
+.about-content-centered .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.about-content-centered .stat-number {
+  font-size: clamp(2.5rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--color-accent);
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+.about-content-centered .stat-item p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-secondary);
+}
+
+/* ---- Faded Premium Background Viewfinder ---- */
+.about-bg-viewfinder {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.08; /* Lightened to keep animation elegant and non-distracting behind the text */
+}
+
+/* Bounding corners of the camera viewport inside the section */
+.about-bg-viewfinder .vf-corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--color-accent);
+  transition: all 0.3s ease;
+}
+
+.about-bg-viewfinder .vf-tl { top: 40px; left: 40px; border-right: none; border-bottom: none; }
+.about-bg-viewfinder .vf-tr { top: 40px; right: 40px; border-left: none; border-bottom: none; }
+.about-bg-viewfinder .vf-bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
+.about-bg-viewfinder .vf-br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
+
+/* Viewfinder UI Details */
+.about-bg-viewfinder .vf-rec {
+  position: absolute;
+  top: 45px;
+  left: 110px;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 2px;
+}
+
+.about-bg-viewfinder .rec-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  animation: blink 1s infinite alternate;
+}
+
+.about-bg-viewfinder .vf-timecode {
+  position: absolute;
+  bottom: 45px;
+  right: 110px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+}
+
+.about-bg-viewfinder .vf-focus-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: var(--color-accent);
+  opacity: 0.15; /* Lightened so it doesn't disturb the centered text */
+  font-weight: 300;
+}
+
+.about-bg-viewfinder .vf-data-left {
+  position: absolute;
+  left: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.about-bg-viewfinder .vf-data-right {
+  position: absolute;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.about-bg-viewfinder .vf-bar {
+  width: 4px;
+  height: 25px;
+  background: var(--color-accent);
+  border-radius: 4px;
+  opacity: 0.3;
+}
+
+.about-bg-viewfinder .vf-bar:nth-child(2) {
+  opacity: 1;
+}
+
+/* Center-positioned Lens Rings Background */
+.bg-lens-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.bg-lens-rings .lens-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(224, 83, 38, 0.08);
+}
+
+.bg-lens-rings .ring-1 {
+  width: 90%;
+  height: 90%;
+  border: 2px dashed rgba(224, 83, 38, 0.2);
+  animation: spin 40s linear infinite;
+}
+
+.bg-lens-rings .ring-2 {
+  width: 70%;
+  height: 70%;
+  border-top: 2px solid rgba(224, 83, 38, 0.4);
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid rgba(224, 83, 38, 0.05);
+  border-left: 2px solid transparent;
+  animation: spin 25s linear infinite reverse;
+}
+
+.bg-lens-rings .ring-3 {
+  width: 45%;
+  height: 45%;
+  background: transparent; /* Transparent background so it doesn't block text readability */
+  border: 1.5px solid rgba(224, 83, 38, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-lens-rings .lens-core {
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: transparent; /* Hollow core design for modern camera overlay appearance */
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 15px rgba(224, 83, 38, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: core-pulse 4s infinite ease-in-out;
+}
+
+.bg-lens-rings .lens-core::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 30%;
+  height: 30%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes core-pulse {
+  0%, 100% { transform: scale(1); box-shadow: inset 0 0 10px rgba(0,0,0,0.2); }
+  50% { transform: scale(1.08); box-shadow: inset 0 0 15px rgba(0,0,0,0.3), 0 0 20px rgba(224, 83, 38, 0.4); }
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Responsive adjust */
+@media (max-width: 992px) {
+  .about-bg-viewfinder .vf-rec { left: 60px; }
+  .about-bg-viewfinder .vf-timecode { right: 60px; }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 80px 0;
+  }
+  
+  .about-content-centered .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  
+  .about-bg-viewfinder .vf-corner {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .about-bg-viewfinder .vf-tl { top: 20px; left: 20px; }
+  .about-bg-viewfinder .vf-tr { top: 20px; right: 20px; }
+  .about-bg-viewfinder .vf-bl { bottom: 20px; left: 20px; }
+  .about-bg-viewfinder .vf-br { bottom: 20px; right: 20px; }
+  
+  .about-bg-viewfinder .vf-rec { top: 25px; left: 60px; font-size: 0.8rem; }
+  .about-bg-viewfinder .vf-timecode { bottom: 25px; right: 60px; font-size: 0.85rem; }
+  
+  .about-bg-viewfinder .vf-data-left,
+  .about-bg-viewfinder .vf-data-right {
+    display: none;
+  }
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Services = () => {
+const Events=() =>{
   return (
-    <section className="services" id="services">
+    <section className="events" id="Events">
 
       
       <div className="container">
@@ -87,4 +87,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Events;

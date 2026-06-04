@@ -72,7 +72,7 @@ const JoinTechLenz = () => {
                 </a>
               </div>
               <div className="section-header text-center">
-                <p className="section-label">JOIN TECHLENZ</p>
+                <p className="section-label">CONTACT US</p>
                 <h2><span className="text-accent">Want to become part</span> of our tech storytelling crew?</h2>
                 <p>Whether you're a creator, mentor, or event specialist, we want people who are excited to join TechLenz and grow with us.</p>
               </div>

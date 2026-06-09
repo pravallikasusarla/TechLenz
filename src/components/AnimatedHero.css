@@ -503,3 +503,102 @@
   50%, 90% { opacity: 1; box-shadow: 0 0 15px #ff3b30; }
   100% { opacity: 0.2; box-shadow: 0 0 0px #ff3b30; }
 }
+
+/* ==========================================================================
+   AnimatedHero Responsive — Mobile & Tablet
+   ========================================================================== */
+
+/* ── Tablet / Split-view (≤991px) ─────────────────────────────────────── */
+@media (max-width: 991px) {
+  .css-3d-scene {
+    height: 420px;
+    perspective: 900px;
+  }
+
+  .smartphone-frame {
+    width: 230px;
+    height: 460px;
+    border-radius: 36px;
+  }
+
+  /* Scale down the floating pop-out cards so they don't escape the viewport */
+  .pop-wrapper {
+    transform-origin: center center;
+  }
+
+  @keyframes popOut1 { 100% { transform: translate(-200px, -140px) translateZ(50px) scale(0.85); opacity: 1; } }
+  @keyframes popOut2 { 100% { transform: translate(100px, -110px) translateZ(40px) scale(0.85); opacity: 1; } }
+  @keyframes popOut3 { 100% { transform: translate(-210px,    0px) translateZ(60px) scale(0.85); opacity: 1; } }
+  @keyframes popOut4 { 100% { transform: translate(110px,   40px) translateZ(45px) scale(0.85); opacity: 1; } }
+  @keyframes popOut5 { 100% { transform: translate(-170px, 130px) translateZ(55px) scale(0.85); opacity: 1; } }
+  @keyframes popOut6 { 100% { transform: translate( 90px,  160px) translateZ(35px) scale(0.85); opacity: 1; } }
+
+  .floating-item {
+    padding: 9px 12px;
+  }
+
+  .item-label {
+    font-size: 0.68rem;
+  }
+
+  /* Scale the background camera focus elements down */
+  .focus-1 { width: 220px; height: 150px; }
+  .focus-2 { width: 130px; height: 90px; }
+
+  /* Smaller ambient spheres */
+  .sphere-1 { width: 50px; height: 50px; }
+  .sphere-2 { width: 35px; height: 35px; }
+  .sphere-3 { width: 26px; height: 26px; }
+
+  .rec-indicator {
+    top: 28px;
+    right: 30px;
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+}
+
+/* ── Mobile portrait (≤600px) ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .css-3d-scene {
+    height: 340px;
+    perspective: 700px;
+  }
+
+  .smartphone-frame {
+    width: 180px;
+    height: 360px;
+    border-radius: 28px;
+    border-width: 3px;
+  }
+
+  /* On narrow phones, hide the 3D floating cards to avoid overflow */
+  .pop-wrapper {
+    display: none;
+  }
+
+  /* Also hide background decorative elements that can scroll */
+  .floating-sphere,
+  .camera-focus-element,
+  .crosshair,
+  .rec-indicator {
+    display: none;
+  }
+
+  .css-3d-scene .orb {
+    filter: blur(40px);
+  }
+}
+
+/* ── Very small phones (≤380px) ───────────────────────────────────────── */
+@media (max-width: 380px) {
+  .css-3d-scene {
+    height: 280px;
+  }
+
+  .smartphone-frame {
+    width: 150px;
+    height: 300px;
+    border-radius: 24px;
+  }
+}

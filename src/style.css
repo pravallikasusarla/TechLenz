@@ -125,23 +125,25 @@ button, input, select, textarea {
     transform: translateX(-50%);
     width: 90%;
     max-width: 1100px;
-    z-index: 100;
+    /* High z-index so nothing can cover the header */
+    z-index: 9999;
     background: transparent;
     border-radius: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Visible border that works on both light and dark backgrounds */
+    border: 1px solid rgba(224, 83, 38, 0.18);
     transition: all var(--transition-normal);
     padding: 8px 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    /* overflow:hidden removed — it breaks position:fixed on split screens */
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10), 0 1px 0 rgba(255,255,255,0.6) inset;
 }
 
 .header::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    /* More opaque so it's always visible against any background */
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: -1;
     border-radius: 100px;
     transition: background var(--transition-normal);
@@ -3596,7 +3598,19 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     }
 }
 
-/* ── Header / Nav — touch target sizing ─────────────────────────────── */
+/* ── Header / Nav — touch target sizing & split-view fixes ──────────── */
+@media (max-width: 1024px) {
+    .header {
+        /* Ensure header is always on top on tablets/split view */
+        z-index: 9999;
+    }
+
+    .header::before {
+        /* Fully opaque on smaller screens so it's always visible */
+        background: rgba(255, 255, 255, 0.97) !important;
+    }
+}
+
 @media (max-width: 768px) {
     .header {
         top: 10px;
@@ -3614,6 +3628,10 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
         top: 8px;
         width: 92%;
         padding: 4px 14px;
+        /* On very small screens, fully solid background */
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(224, 83, 38, 0.25);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     }
 
     .logo-image {
@@ -3622,10 +3640,11 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 /* ── Prevent horizontal overflow on all screens ─────────────────────── */
-/* NOTE: overflow-x:hidden must NOT be set on <html> — it breaks position:fixed headers.
-   Only set it on <body> so fixed elements (header, chatbot, modals) remain visible. */
+/* overflow-x:clip is the safe alternative to overflow-x:hidden.
+   Unlike 'hidden', 'clip' does NOT create a scroll container,
+   so position:fixed elements (header, chatbot, modals) always remain visible. */
 body {
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* ── Smooth tap highlight removal for mobile ─────────────────────────── */

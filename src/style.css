@@ -123,8 +123,8 @@ button, input, select, textarea {
     top: 15px;
     left: 0;
     right: 0;
-    width: 92%;
-    max-width: min(1100px, calc(100vw - 32px));
+    width: 94%;
+    max-width: min(1100px, calc(100vw - 24px));
     margin: 0 auto;
     z-index: 9999;
     background: rgba(255, 255, 255, 0.95);
@@ -133,7 +133,7 @@ button, input, select, textarea {
     border-radius: 100px;
     border: 1px solid rgba(224, 83, 38, 0.2);
     transition: all var(--transition-normal);
-    padding: clamp(4px, 0.6vw, 6px) clamp(10px, 2vw, 20px);
+    padding: clamp(2px, 0.6vw, 6px) clamp(6px, 1.5vw, 20px);
     box-shadow: 0 4px 28px rgba(0, 0, 0, 0.12), 0 1px 0 rgba(255,255,255,0.8) inset;
 }
 
@@ -160,7 +160,7 @@ button, input, select, textarea {
     align-items: center;
     width: 100%;
     padding: 0;
-    gap: clamp(4px, 1.2vw, 16px);
+    gap: clamp(2px, 1.2vw, 16px);
     min-width: 0;
 }
 
@@ -170,7 +170,7 @@ button, input, select, textarea {
 }
 
 .logo-image {
-    height: clamp(44px, 7vw, 75px);
+    height: clamp(32px, 8vw, 75px);
     object-fit: contain;
     opacity: 0;
     transform: translateY(-10px) scale(0.95);
@@ -220,23 +220,18 @@ body::before {
     }
 }
 
-/* Nav links — visible on tablet+ only; hidden on phone to keep Contact Us always fully visible */
+/* Nav links — always visible on ALL screen sizes, scales down on phone */
 .nav-links {
     display: flex;
-    gap: clamp(8px, 1.8vw, 32px);
+    gap: clamp(2px, 1.5vw, 32px);
     flex-wrap: nowrap;
     align-items: center;
-}
-
-/* Hide nav links on small phones so Contact Us is never clipped */
-@media (max-width: 540px) {
-    .nav-links {
-        display: none;
-    }
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .nav-link {
-    font-size: clamp(0.75rem, 1.1vw, 1.05rem);
+    font-size: clamp(0.55rem, 2.2vw, 1.05rem);
     font-weight: 600;
     color: var(--color-text-secondary);
     white-space: nowrap;
@@ -245,16 +240,17 @@ body::before {
 
 .nav-link:hover { color: var(--color-text-primary); }
 
-/* Contact Us button — always visible, scales down on small screens */
+/* Contact Us button — always visible, scales down on phone */
 .header-actions {
     flex-shrink: 0;
 }
 
 .header-actions .btn {
-    font-size: clamp(0.72rem, 1.8vw, 0.95rem);
-    padding: clamp(8px, 1.2vw, 12px) clamp(12px, 2vw, 24px);
+    font-size: clamp(0.6rem, 2vw, 0.95rem);
+    padding: clamp(5px, 1.2vw, 12px) clamp(8px, 1.8vw, 24px);
     white-space: nowrap;
     flex-shrink: 0;
+    border-radius: 100px;
 }
 
 /* ==========================================================================

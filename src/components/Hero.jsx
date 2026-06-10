@@ -131,8 +131,8 @@ const Hero = () => {
         <div className="hero-visual">
           <div className="css-3d-scene floating-element">
             
-            {/* The Smartphone */}
-            <div className="smartphone-frame">
+            {/* Android Phone */}
+            <div className="smartphone-frame android-phone">
               <div className="smartphone-screen">
                 
                 {/* Custom Animated Scenes State */}
@@ -142,7 +142,7 @@ const Hero = () => {
                     "/reel3.mp4",
                     "/reel2.mp4",
                     "/reel3.mp4", 
-                    "/reel2.mp4" // Duplicate for seamless looping
+                    "/reel2.mp4"
                   ].map((videoSrc, index) => (
                     <div className="ig-embed-container" key={index} style={{ width: '100%', height: '100%', flexShrink: 0, position: 'relative', background: '#000' }}>
                       <video 
@@ -161,6 +161,44 @@ const Hero = () => {
                 </div>
 
               </div>
+              {/* Android label */}
+              <div className="phone-label android-label">Android</div>
+            </div>
+
+            {/* iOS iPhone with Dynamic Island */}
+            <div className="smartphone-frame ios-phone">
+              <div className="smartphone-screen ios-screen">
+                
+                {/* Dynamic Island pill */}
+                <div className="dynamic-island"></div>
+
+                <div className="animated-scenes-feed ig-feed" style={{ pointerEvents: 'none' }}>
+                  {[
+                    "/reel3.mp4",
+                    "/reel2.mp4",
+                    "/reel3.mp4",
+                    "/reel2.mp4",
+                    "/reel3.mp4"
+                  ].map((videoSrc, index) => (
+                    <div className="ig-embed-container" key={`ios-${index}`} style={{ width: '100%', height: '100%', flexShrink: 0, position: 'relative', background: '#000' }}>
+                      <video 
+                        src={videoSrc}
+                        loop
+                        muted
+                        playsInline
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="scenes-ui-overlay">
+                  <div className="overlay-brand">TECHLENZ</div>
+                </div>
+
+              </div>
+              {/* iOS label */}
+              <div className="phone-label ios-label">iOS</div>
             </div>
             
             {/* SVG Definitions for Vibrant Gradients */}

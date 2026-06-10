@@ -170,7 +170,7 @@ button, input, select, textarea {
 }
 
 .logo-image {
-    height: clamp(32px, 8vw, 75px);
+    height: clamp(40px, 10vw, 75px);
     object-fit: contain;
     opacity: 0;
     transform: translateY(-10px) scale(0.95);
@@ -270,18 +270,19 @@ body::before {
     align-items: center;
 }
 
-/* Shift container slightly towards left but maintain breathing room */
+/* Hero container: full width on mobile, shifted left on desktop */
 .hero .container {
-    margin-left: 10%;
+    margin-left: 5%;
     padding-left: 0;
-    padding-right: 5%; /* Push phone inwards from the right edge */
-    max-width: 85%;
+    padding-right: 2%;
+    max-width: 90%;
 }
 
+/* Give the visual column more room for the dual-phone display */
 @media (min-width: 992px) {
     .hero-grid {
-        grid-template-columns: 0.9fr 1.1fr;
-        gap: 120px;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 60px;
         align-items: center;
         padding-left: 0;
     }
@@ -3612,34 +3613,186 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 /* ── Header / Nav — split-view & mobile fixes ──────────────────── */
+/* Hamburger Button & Mobile Drawer Base Styles (Hidden on Desktop) */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10000;
+}
+
+.hamburger-btn .ham-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    border-radius: 4px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Slide-in Mobile Drawer Overlay */
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.mobile-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Slide-in Drawer Container */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 320px;
+    background: var(--color-bg);
+    z-index: 99999;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform var(--transition-normal);
+}
+
+.mobile-drawer.open {
+    transform: translateX(0);
+}
+
+.mobile-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.mobile-drawer-logo {
+    height: 44px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.mobile-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.mobile-drawer-close:hover {
+    color: var(--color-accent);
+    background: var(--color-bg-alt);
+}
+
+.mobile-drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.mobile-drawer-link {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: all var(--transition-fast);
+}
+
+.mobile-drawer-link:hover {
+    color: var(--color-accent);
+    padding-left: 6px;
+}
+
+.mobile-drawer-cta {
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Hide mobile drawer and overlay when Enquiry modal is open */
+body.enquiry-open .mobile-overlay,
+body.enquiry-open .mobile-drawer {
+    display: none !important;
+}
+
 @media (max-width: 1024px) {
     .header {
         width: 88%;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .header {
         top: 10px;
-        width: calc(100% - 32px); /* 16px margin each side */
-        padding: 5px 16px;
+        width: calc(100% - 24px);
+        /* Enough vertical padding so the big logo has breathing room */
+        padding: 6px 16px;
+    }
+
+    .header-container {
+        gap: 0; /* logo on left, hamburger on right — no gap needed */
+    }
+
+    /* Big, prominent logo on phone */
+    .logo-image {
+        height: 64px;
+    }
+
+    /* Hide desktop nav & Contact Us — phone only */
+    .nav-links {
+        display: none;
+    }
+
+    .header-actions {
+        display: none;
+    }
+
+    /* Show larger, tap-friendly hamburger */
+    .hamburger-btn {
+        display: flex;
+        width: 36px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    .hamburger-btn .ham-line {
+        height: 2.5px;
+    }
+}
+
+@media (max-width: 380px) {
+    .header {
+        top: 8px;
+        width: calc(100% - 20px);
+        padding: 5px 14px;
     }
 
     .logo-image {
         height: 56px;
-    }
-}
-
-@media (max-width: 480px) {
-    .header {
-        top: 8px;
-        width: calc(100% - 24px); /* 12px margin each side */
-        padding: 4px 14px;
-        border-radius: 60px;
-    }
-
-    .logo-image {
-        height: 48px;
     }
 }
 

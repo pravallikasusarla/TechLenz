@@ -33,19 +33,21 @@ const EnquiryModal = () => {
     if (!hasTriggeredRef.current) {
       setIsOpen(true);
       hasTriggeredRef.current = true;
+      document.body.classList.add('enquiry-open');
     }
   };
 
   // Helper to close the modal
   const closeModal = () => {
     setIsOpen(false);
-    // Ensure we also lock the trigger ref so it doesn't fire again during this load
     hasTriggeredRef.current = true;
+    document.body.classList.remove('enquiry-open');
   };
 
   // Force open modal (e.g. from the floating badge)
   const forceOpenModal = () => {
     setIsOpen(true);
+    document.body.classList.add('enquiry-open');
   };
 
   useEffect(() => {

@@ -14,10 +14,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 10000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide the header & floating badge when enquiry modal is open */
+body.enquiry-open .header,
+body.enquiry-open .enquiry-floating-badge {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
 .enquiry-modal-overlay.active {

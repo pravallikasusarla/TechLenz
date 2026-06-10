@@ -121,42 +121,38 @@ button, input, select, textarea {
 .header {
     position: fixed;
     top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 1100px;
-    /* High z-index so nothing can cover the header */
+    left: 0;
+    right: 0;
+    width: 92%;
+    max-width: min(1100px, calc(100vw - 32px));
+    margin: 0 auto;
     z-index: 9999;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 100px;
-    /* Visible border that works on both light and dark backgrounds */
-    border: 1px solid rgba(224, 83, 38, 0.18);
+    border: 1px solid rgba(224, 83, 38, 0.2);
     transition: all var(--transition-normal);
-    padding: 8px 24px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10), 0 1px 0 rgba(255,255,255,0.6) inset;
+    padding: clamp(4px, 0.6vw, 6px) clamp(10px, 2vw, 20px);
+    box-shadow: 0 4px 28px rgba(0, 0, 0, 0.12), 0 1px 0 rgba(255,255,255,0.8) inset;
+    overflow: hidden;
 }
 
+/* ::before no longer needed for background — it's now directly on .header */
 .header::before {
     content: "";
     position: absolute;
     inset: 0;
-    /* More opaque so it's always visible against any background */
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    z-index: -1;
     border-radius: 100px;
-    transition: background var(--transition-normal);
+    background: transparent;
+    z-index: -1;
 }
 
 .header.scrolled {
     top: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-    padding: 4px 24px;
-}
-
-.header.scrolled::before {
-    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.14);
+    padding: 4px 20px;
+    background: rgba(255, 255, 255, 0.98);
 }
 
 .header-container {
@@ -165,6 +161,9 @@ button, input, select, textarea {
     align-items: center;
     width: 100%;
     padding: 0;
+    gap: clamp(4px, 1.2vw, 16px);
+    min-width: 0;
+    overflow: hidden;
 }
 
 .header-logo-wrapper {
@@ -173,7 +172,7 @@ button, input, select, textarea {
 }
 
 .logo-image {
-    height: 75px;
+    height: clamp(44px, 7vw, 75px);
     object-fit: contain;
     opacity: 0;
     transform: translateY(-10px) scale(0.95);
@@ -181,6 +180,7 @@ button, input, select, textarea {
     animation: logo-drop 0.8s ease-out 0.18s forwards;
     mix-blend-mode: multiply;
     background: transparent;
+    flex-shrink: 0;
 }
 
 .logo-image:hover {
@@ -222,23 +222,29 @@ body::before {
     }
 }
 
+/* Always-visible nav — no hamburger, scales on all screen sizes */
 .nav-links {
-    display: none;
-    gap: 32px;
-}
-
-@media (min-width: 768px) {
-    .nav-links { display: flex; }
+    display: flex;
+    gap: clamp(8px, 1.8vw, 32px);
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .nav-link {
-    font-size: 1.15rem;
+    font-size: clamp(0.72rem, 1.1vw, 1.05rem);
     font-weight: 600;
     color: var(--color-text-secondary);
+    white-space: nowrap;
     transition: color var(--transition-fast);
 }
 
 .nav-link:hover { color: var(--color-text-primary); }
+
+.header-actions .btn {
+    font-size: clamp(0.7rem, 1vw, 0.95rem);
+    padding: clamp(7px, 1vw, 12px) clamp(10px, 1.4vw, 24px);
+    white-space: nowrap;
+}
 
 /* ==========================================================================
    Hero Section (Split Layout)
@@ -3598,44 +3604,35 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     }
 }
 
-/* ── Header / Nav — touch target sizing & split-view fixes ──────────── */
+/* ── Header / Nav — split-view & mobile fixes ──────────────────── */
 @media (max-width: 1024px) {
     .header {
-        /* Ensure header is always on top on tablets/split view */
-        z-index: 9999;
-    }
-
-    .header::before {
-        /* Fully opaque on smaller screens so it's always visible */
-        background: rgba(255, 255, 255, 0.97) !important;
+        width: 88%;
     }
 }
 
 @media (max-width: 768px) {
     .header {
         top: 10px;
-        width: 94%;
-        padding: 6px 16px;
+        width: calc(100% - 32px); /* 16px margin each side */
+        padding: 5px 16px;
     }
 
     .logo-image {
-        height: 58px;
+        height: 56px;
     }
 }
 
 @media (max-width: 480px) {
     .header {
         top: 8px;
-        width: 92%;
+        width: calc(100% - 24px); /* 12px margin each side */
         padding: 4px 14px;
-        /* On very small screens, fully solid background */
-        background: rgba(255, 255, 255, 0.98);
-        border-color: rgba(224, 83, 38, 0.25);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        border-radius: 60px;
     }
 
     .logo-image {
-        height: 50px;
+        height: 48px;
     }
 }
 

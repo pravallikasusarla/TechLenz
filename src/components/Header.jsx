@@ -5,13 +5,8 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -24,14 +19,14 @@ const Header = () => {
             <img src="/logo1.png?v=1" alt="TechLenz Logo" className="logo-image" />
           </a>
         </div>
-        
+
         <nav className="nav-links">
           <a href="#about" className="nav-link">About</a>
           <a href="#services" className="nav-link">Our Coverage</a>
           <a href="#explore" className="nav-link">Events</a>
           <a href="#pitch" className="nav-link">Pitch Your Startup</a>
         </nav>
-        
+
         <div className="header-actions">
           <a href="#join" className="btn btn-primary">Contact Us</a>
         </div>

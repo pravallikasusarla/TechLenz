@@ -421,3 +421,12 @@ body.enquiry-open .enquiry-floating-badge {
     padding: 16px 12px;
   }
 }
+
+@media (max-width: 991px) {
+  .enquiry-floating-badge {
+    top: 72%;
+  }
+  .enquiry-floating-badge:hover {
+    transform: translateY(-50%) rotate(180deg) translateX(6px);
+  }
+}

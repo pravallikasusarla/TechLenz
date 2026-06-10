@@ -3430,12 +3430,12 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
         margin: 0 auto;
     }
 
-    /* Contain the phone scene so cards don't cause page-level overflow */
+    /* Allow cards to float outside the container without clipping */
     .hero-visual {
         width: 100%;
         display: flex;
         justify-content: center;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .css-3d-scene {

@@ -333,12 +333,12 @@
 .pop-card-5 { animation: popOut5 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 3s; }
 .pop-card-6 { animation: popOut6 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 3.5s; }
 
-@keyframes popOut1 { 100% { transform: translate(-360px, -200px) translateZ(80px) scale(1); opacity: 1; } }
-@keyframes popOut2 { 100% { transform: translate(220px, -150px) translateZ(60px) scale(1); opacity: 1; } }
-@keyframes popOut3 { 100% { transform: translate(-370px, 0px) translateZ(100px) scale(1); opacity: 1; } }
-@keyframes popOut4 { 100% { transform: translate(230px, 50px) translateZ(70px) scale(1); opacity: 1; } }
-@keyframes popOut5 { 100% { transform: translate(-330px, 180px) translateZ(90px) scale(1); opacity: 1; } }
-@keyframes popOut6 { 100% { transform: translate(200px, 220px) translateZ(50px) scale(1); opacity: 1; } }
+@keyframes popOut1 { 100% { transform: translate(-230px, -180px) translateZ(80px) scale(1); opacity: 1; } }
+@keyframes popOut2 { 100% { transform: translate(230px, -180px) translateZ(60px) scale(1); opacity: 1; } }
+@keyframes popOut3 { 100% { transform: translate(-250px, 0px) translateZ(100px) scale(1); opacity: 1; } }
+@keyframes popOut4 { 100% { transform: translate(250px, 0px) translateZ(70px) scale(1); opacity: 1; } }
+@keyframes popOut5 { 100% { transform: translate(-220px, 180px) translateZ(90px) scale(1); opacity: 1; } }
+@keyframes popOut6 { 100% { transform: translate(220px, 180px) translateZ(50px) scale(1); opacity: 1; } }
 
 /* Inner float animation - Runs infinitely inside the popped wrapper */
 .floating-item {
@@ -583,12 +583,12 @@
   }
 
   /* Bring cards in closer so they don't escape viewport */
-  @keyframes popOut1 { 100% { transform: translate(-220px, -130px) translateZ(40px) scale(0.8); opacity: 1; } }
-  @keyframes popOut2 { 100% { transform: translate(170px,  -110px) translateZ(30px) scale(0.8); opacity: 1; } }
-  @keyframes popOut3 { 100% { transform: translate(-230px,    0px) translateZ(50px) scale(0.8); opacity: 1; } }
-  @keyframes popOut4 { 100% { transform: translate(175px,   40px) translateZ(35px) scale(0.8); opacity: 1; } }
-  @keyframes popOut5 { 100% { transform: translate(-200px, 130px) translateZ(45px) scale(0.8); opacity: 1; } }
-  @keyframes popOut6 { 100% { transform: translate(155px,  150px) translateZ(25px) scale(0.8); opacity: 1; } }
+  @keyframes popOut1 { 100% { transform: translate(-165px, -130px) translateZ(40px) scale(0.8); opacity: 1; } }
+  @keyframes popOut2 { 100% { transform: translate(165px,  -130px) translateZ(30px) scale(0.8); opacity: 1; } }
+  @keyframes popOut3 { 100% { transform: translate(-180px,    0px) translateZ(50px) scale(0.8); opacity: 1; } }
+  @keyframes popOut4 { 100% { transform: translate(180px,    0px) translateZ(35px) scale(0.8); opacity: 1; } }
+  @keyframes popOut5 { 100% { transform: translate(-165px,  130px) translateZ(45px) scale(0.8); opacity: 1; } }
+  @keyframes popOut6 { 100% { transform: translate(165px,   130px) translateZ(25px) scale(0.8); opacity: 1; } }
 
   .floating-item {
     padding: 9px 12px;
@@ -652,12 +652,12 @@
   }
 
   /* Cards sit close to the phone edges, scaled small */
-  @keyframes popOut1 { 100% { transform: translate(-130px, -130px) translateZ(0px) scale(0.68); opacity: 1; } }
-  @keyframes popOut2 { 100% { transform: translate( 105px, -115px) translateZ(0px) scale(0.68); opacity: 1; } }
-  @keyframes popOut3 { 100% { transform: translate(-138px,    0px) translateZ(0px) scale(0.68); opacity: 1; } }
-  @keyframes popOut4 { 100% { transform: translate( 112px,   20px) translateZ(0px) scale(0.68); opacity: 1; } }
-  @keyframes popOut5 { 100% { transform: translate(-125px,  130px) translateZ(0px) scale(0.68); opacity: 1; } }
-  @keyframes popOut6 { 100% { transform: translate( 100px,  135px) translateZ(0px) scale(0.68); opacity: 1; } }
+  @keyframes popOut1 { 100% { transform: translate(-115px, -120px) translateZ(0px) scale(0.65); opacity: 1; } }
+  @keyframes popOut2 { 100% { transform: translate(115px,  -120px) translateZ(0px) scale(0.65); opacity: 1; } }
+  @keyframes popOut3 { 100% { transform: translate(-122px,    0px) translateZ(0px) scale(0.65); opacity: 1; } }
+  @keyframes popOut4 { 100% { transform: translate(122px,    0px) translateZ(0px) scale(0.65); opacity: 1; } }
+  @keyframes popOut5 { 100% { transform: translate(-115px,  120px) translateZ(0px) scale(0.65); opacity: 1; } }
+  @keyframes popOut6 { 100% { transform: translate(115px,   120px) translateZ(0px) scale(0.65); opacity: 1; } }
 
   /* Compact card style on mobile */
   .floating-item {
@@ -701,10 +701,10 @@
   }
 
   /* Even tighter positions for very small screens */
-  @keyframes popOut1 { 100% { transform: translate(-112px, -115px) translateZ(0px) scale(0.6); opacity: 1; } }
-  @keyframes popOut2 { 100% { transform: translate(  90px, -100px) translateZ(0px) scale(0.6); opacity: 1; } }
-  @keyframes popOut3 { 100% { transform: translate(-118px,    0px) translateZ(0px) scale(0.6); opacity: 1; } }
-  @keyframes popOut4 { 100% { transform: translate(  95px,   15px) translateZ(0px) scale(0.6); opacity: 1; } }
-  @keyframes popOut5 { 100% { transform: translate(-108px,  110px) translateZ(0px) scale(0.6); opacity: 1; } }
-  @keyframes popOut6 { 100% { transform: translate(  85px,  115px) translateZ(0px) scale(0.6); opacity: 1; } }
+  @keyframes popOut1 { 100% { transform: translate(-102px, -105px) translateZ(0px) scale(0.58); opacity: 1; } }
+  @keyframes popOut2 { 100% { transform: translate(102px,  -105px) translateZ(0px) scale(0.58); opacity: 1; } }
+  @keyframes popOut3 { 100% { transform: translate(-108px,    0px) translateZ(0px) scale(0.58); opacity: 1; } }
+  @keyframes popOut4 { 100% { transform: translate(108px,    0px) translateZ(0px) scale(0.58); opacity: 1; } }
+  @keyframes popOut5 { 100% { transform: translate(-102px,  105px) translateZ(0px) scale(0.58); opacity: 1; } }
+  @keyframes popOut6 { 100% { transform: translate(102px,   105px) translateZ(0px) scale(0.58); opacity: 1; } }
 }

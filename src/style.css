@@ -3429,6 +3429,18 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
         max-width: 340px;
         margin: 0 auto;
     }
+
+    /* Contain the phone scene so cards don't cause page-level overflow */
+    .hero-visual {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .css-3d-scene {
+        overflow: visible; /* Cards can still visually peek out within hero-visual */
+    }
 }
 
 @media (max-width: 480px) {

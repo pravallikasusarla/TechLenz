@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 40px; /* Space between the two phones */
   perspective: 1200px;
 }
 
@@ -31,35 +30,9 @@
   flex-shrink: 0;
 }
 
-/* Android phone floats slightly different angle */
+/* Phone floats */
 .android-phone {
-  animation: androidFloat 8s ease-in-out infinite;
-  margin-top: 30px; /* Slightly lower */
-}
-
-/* iOS phone floats in opposite phase */
-.ios-phone {
-  animation: iosFloat 8s ease-in-out infinite;
-  margin-top: -30px; /* Slightly higher */
-  /* Subtle silver/titanium border for iPhone look */
-  border-color: rgba(180, 180, 200, 0.8);
-  background: linear-gradient(135deg, rgba(230, 230, 255, 0.5), rgba(255,255,255,0.1));
-  box-shadow:
-    0 40px 80px rgba(0,0,0,0.18),
-    inset 0 0 25px rgba(130,130,180,0.2),
-    0 0 50px rgba(100,100,200,0.3);
-}
-
-@keyframes androidFloat {
-  0% { transform: rotateY(-8deg) rotateX(4deg) translateY(0); }
-  50% { transform: rotateY(4deg) rotateX(6deg) translateY(-18px); }
-  100% { transform: rotateY(-8deg) rotateX(4deg) translateY(0); }
-}
-
-@keyframes iosFloat {
-  0% { transform: rotateY(8deg) rotateX(-4deg) translateY(-18px); }
-  50% { transform: rotateY(-4deg) rotateX(-6deg) translateY(0); }
-  100% { transform: rotateY(8deg) rotateX(-4deg) translateY(-18px); }
+  animation: phoneFloat 8s ease-in-out infinite;
 }
 
 /* Phone label badge */

@@ -616,42 +616,66 @@
 /* ── Mobile portrait (≤600px) ─────────────────────────────────────────── */
 @media (max-width: 600px) {
   .css-3d-scene {
-    height: 380px;
+    height: 460px;      /* Taller so cards have vertical room above & below */
     perspective: 800px;
     overflow: visible;
   }
 
   .smartphone-frame {
-    width: 170px;
-    height: 350px;
-    border-radius: 30px;
+    width: 160px;
+    height: 330px;
+    border-radius: 28px;
     border-width: 3px;
-    /* Disable 3D tilt on mobile — looks bad on small screens */
+    /* Simple float on mobile — no 3D tilt */
     animation: phoneFloatMobile 6s ease-in-out infinite;
   }
 
   @keyframes phoneFloatMobile {
     0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-14px); }
+    50%  { transform: translateY(-10px); }
     100% { transform: translateY(0px); }
   }
 
   .dynamic-island {
-    width: 65px;
-    height: 22px;
-    top: 10px;
+    width: 60px;
+    height: 20px;
+    top: 8px;
   }
 
   .smartphone-screen::before {
+    height: 20px;
+  }
+
+  /* Show cards — tightly hugging the phone left & right */
+  .pop-wrapper {
+    display: block;
+  }
+
+  /* Cards sit close to the phone edges, scaled small */
+  @keyframes popOut1 { 100% { transform: translate(-130px, -130px) translateZ(0px) scale(0.68); opacity: 1; } }
+  @keyframes popOut2 { 100% { transform: translate( 105px, -115px) translateZ(0px) scale(0.68); opacity: 1; } }
+  @keyframes popOut3 { 100% { transform: translate(-138px,    0px) translateZ(0px) scale(0.68); opacity: 1; } }
+  @keyframes popOut4 { 100% { transform: translate( 112px,   20px) translateZ(0px) scale(0.68); opacity: 1; } }
+  @keyframes popOut5 { 100% { transform: translate(-125px,  130px) translateZ(0px) scale(0.68); opacity: 1; } }
+  @keyframes popOut6 { 100% { transform: translate( 100px,  135px) translateZ(0px) scale(0.68); opacity: 1; } }
+
+  /* Compact card style on mobile */
+  .floating-item {
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  .item-icon-wrapper svg {
+    width: 22px;
     height: 22px;
   }
 
-  /* Hide floating pop-out cards on mobile — they overflow the viewport */
-  .pop-wrapper {
-    display: none;
+  .item-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
   }
 
-  /* Hide background decorative elements that clutter mobile */
+  /* Hide heavy background decorative elements */
   .floating-sphere,
   .camera-focus-element,
   .crosshair,
@@ -667,16 +691,20 @@
 /* ── Very small phones (≤380px) ───────────────────────────────────────── */
 @media (max-width: 380px) {
   .css-3d-scene {
-    height: 320px;
+    height: 420px;
   }
 
   .smartphone-frame {
-    width: 145px;
-    height: 300px;
-    border-radius: 26px;
+    width: 140px;
+    height: 295px;
+    border-radius: 24px;
   }
 
-  .pop-wrapper {
-    display: none;
-  }
+  /* Even tighter positions for very small screens */
+  @keyframes popOut1 { 100% { transform: translate(-112px, -115px) translateZ(0px) scale(0.6); opacity: 1; } }
+  @keyframes popOut2 { 100% { transform: translate(  90px, -100px) translateZ(0px) scale(0.6); opacity: 1; } }
+  @keyframes popOut3 { 100% { transform: translate(-118px,    0px) translateZ(0px) scale(0.6); opacity: 1; } }
+  @keyframes popOut4 { 100% { transform: translate(  95px,   15px) translateZ(0px) scale(0.6); opacity: 1; } }
+  @keyframes popOut5 { 100% { transform: translate(-108px,  110px) translateZ(0px) scale(0.6); opacity: 1; } }
+  @keyframes popOut6 { 100% { transform: translate(  85px,  115px) translateZ(0px) scale(0.6); opacity: 1; } }
 }

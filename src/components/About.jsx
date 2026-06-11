@@ -46,7 +46,7 @@ const About = () => {
         <div className="about-content-centered">
           <div className="about-text-content animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <p>TechLenz was born from a simple observation by our founders. Incredible technical milestones were happening every day, but rarely were they documented with the quality they deserved.</p>
-            <p>We are a specialized media unit dedicated entirely to the tech ecosystem. Whether it's a 24-hour hackathon, a startup pitch, or a major product launch, we bring high-quality production to the world of software engineering and entrepreneurship with our <span className="text-accent" style={{ whiteSpace: 'nowrap' }}>EOD system</span>.</p>
+            <p>We are a specialized media unit dedicated entirely to the tech ecosystem. Whether it's a 24-hour hackathon, a startup pitch, or a major product launch, we bring high-quality production to the world of software engineering and entrepreneurship with our <span className="text-accent" style={{ whiteSpace: 'nowrap' }}>EOD Delivery System</span>.</p>
           </div>
 
           <div className="stats-grid animate-slide-up" style={{ animationDelay: '0.2s' }}>

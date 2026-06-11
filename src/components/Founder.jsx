@@ -30,7 +30,7 @@ const Founder = () => {
           <div className="founder-card placeholder-card animate-slide-up">
             <div className="founder-image-wrapper">
               <div className="tech-lens-container founder-lens-container placeholder-lens">
-                <img src="/karthika1tl.png" alt="Karthika Reddy" className="founder-image" />
+                <img src="/karthika1tl.png" alt="Karthika Reddy" className="founder-image karthika-img" />
               </div>
             </div>
 
@@ -47,7 +47,7 @@ const Founder = () => {
           <div className="founder-card placeholder-card animate-slide-up">
             <div className="founder-image-wrapper">
               <div className="tech-lens-container founder-lens-container placeholder-lens">
-                <img src="/naga1tl.png" alt="Naga Reddy" className="founder-image" />
+                <img src="/nagareddy1.png" alt="Naga Reddy" className="founder-image naga-img" />
               </div>
             </div>
 
@@ -64,7 +64,7 @@ const Founder = () => {
           <div className="founder-card placeholder-card animate-slide-up">
             <div className="founder-image-wrapper">
               <div className="tech-lens-container founder-lens-container placeholder-lens">
-                <img src="/saikrishnatl.png" alt="Saikrishna" className="founder-image" />
+                <img src="/saikrishnatl.png" alt="Saikrishna" className="founder-image saikrishna-img" />
               </div>
             </div>
 

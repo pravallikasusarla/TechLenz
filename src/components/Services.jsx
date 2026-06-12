@@ -2,7 +2,7 @@ import React from 'react';
 
 const Events=() =>{
   return (
-    <section className="events" id="Events">
+    <section className="events" id="services">
 
       
       <div className="container">

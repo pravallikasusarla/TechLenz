@@ -15,11 +15,12 @@ import OurClients from './components/OurClients';
 import EnquiryModal from './components/EnquiryModal';
 import Chatbot from './components/Chatbot';
 import Founder from './components/Founder';
+import BecomePartner from './components/BecomePartner';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
-  const [currentView, setCurrentView] = useState('home'); // 'home', 'pitch', or 'join'
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'pitch', 'join', or 'partner'
 
   useEffect(() => {
     const fadeTimer = setTimeout(() => {
@@ -61,6 +62,9 @@ function App() {
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (window.location.hash === '#join') {
         setCurrentView('join');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (window.location.hash === '#partner') {
+        setCurrentView('partner');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentView('home');
@@ -133,14 +137,14 @@ function App() {
         const targetId = target.getAttribute('href');
         if (targetId === '#') return;
 
-        if (targetId === '#pitch' || targetId === '#join') {
+        if (targetId === '#pitch' || targetId === '#join' || targetId === '#partner') {
           e.preventDefault();
           window.location.hash = targetId;
           return;
         }
         
         // If the current view is 'pitch' and the user clicks another anchor, switch back to home first
-        if (currentView === 'pitch' && targetId !== '#pitch') {
+        if (currentView !== 'home' && targetId !== '#pitch' && targetId !== '#join' && targetId !== '#partner') {
           window.location.hash = targetId;
           return;
         }
@@ -192,6 +196,10 @@ function App() {
       ) : currentView === 'join' ? (
         <main style={{ minHeight: '80vh', paddingTop: '80px' }}>
           <JoinTechLenz />
+        </main>
+      ) : currentView === 'partner' ? (
+        <main style={{ minHeight: '80vh', paddingTop: '80px' }}>
+          <BecomePartner />
         </main>
       ) : (
         <main>

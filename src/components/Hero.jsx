@@ -51,12 +51,12 @@ const TypingText = () => {
 const HeroBackgroundAnimation = () => (
   <div className="hero-bg-animation">
     <div className="hero-bg-grid"></div>
-    
+
     <div className="camera-focus-element focus-1">
       <div className="c-corner tl"></div><div className="c-corner tr"></div>
       <div className="c-corner bl"></div><div className="c-corner br"></div>
     </div>
-    
+
     <div className="camera-focus-element focus-2">
       <div className="c-corner tl"></div><div className="c-corner tr"></div>
       <div className="c-corner bl"></div><div className="c-corner br"></div>
@@ -65,10 +65,10 @@ const HeroBackgroundAnimation = () => (
     <div className="crosshair ch-1">+</div>
     <div className="crosshair ch-2">+</div>
     <div className="crosshair ch-3">+</div>
-    
+
     <div className="orb orb-1"></div>
     <div className="orb orb-2"></div>
-    
+
     <div className="rec-indicator">
       <span className="rec-dot"></span> REC
     </div>
@@ -105,11 +105,11 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero" id="home" style={{background: '#ffffff', position: 'relative', overflow: 'hidden'}}>
-      
+    <section className="hero" id="home" style={{ background: '#ffffff', position: 'relative', overflow: 'hidden' }}>
+
       <HeroBackgroundAnimation />
 
-      <div className="container hero-grid" style={{position: 'left', zIndex: 1}}>
+      <div className="container hero-grid" style={{ position: 'left', zIndex: 1 }}>
         <div className="hero-content">
           <h1 className="hero-title">
             <span className="hero-line">End-to-End</span>
@@ -119,33 +119,36 @@ const Hero = () => {
           <p className="hero-subtitle">
             Helping founders and entrepreneurs capture their vision. Pitch your startup or product and get high-quality technical coverage delivered by end of day.
           </p>
-          <div className="hero-actions">
-            <a href="#book-slot" className="btn btn-primary btn-large">Get Started</a>
+          <div className="hero-actions" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '20px' }}>
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+              <a href="#book-slot" className="btn btn-primary btn-large">Book Now</a>
+              <a href="#partner" className="btn btn-outline btn-large" style={{ backgroundColor: '#fff' }}>Become a Partner</a>
+            </div>
             <div className="hero-trust">
               <span className="stars">★★★★★</span>
               <span className="trust-text">Trusted by Entrepreneurs</span>
             </div>
           </div>
         </div>
-        
+
         <div className="hero-visual">
           <div className="css-3d-scene floating-element">
-            
+
             {/* Android Phone */}
             <div className="smartphone-frame android-phone">
               <div className="smartphone-screen">
-                
+
                 {/* Custom Animated Scenes State */}
                 <div className="animated-scenes-feed ig-feed" style={{ pointerEvents: 'none' }} ref={feedRef}>
                   {[
                     "/reel2.mp4",
                     "/reel3.mp4",
                     "/reel2.mp4",
-                    "/reel3.mp4", 
+                    "/reel3.mp4",
                     "/reel2.mp4"
                   ].map((videoSrc, index) => (
                     <div className="ig-embed-container" key={index} style={{ width: '100%', height: '100%', flexShrink: 0, position: 'relative', background: '#000' }}>
-                      <video 
+                      <video
                         src={videoSrc}
                         loop
                         muted
@@ -155,7 +158,7 @@ const Hero = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="scenes-ui-overlay">
                   <div className="overlay-brand">TECHLENZ</div>
                 </div>
@@ -164,7 +167,7 @@ const Hero = () => {
 
             </div>
 
-            
+
             {/* SVG Definitions for Vibrant Gradients */}
             <svg width="0" height="0">
               <defs>
@@ -205,7 +208,7 @@ const Hero = () => {
                 <span className="item-label">Hackathons</span>
               </div>
             </div>
-            
+
             <div className="pop-wrapper pop-card-2">
               <div className="floating-item">
                 <div className="item-icon-wrapper">
@@ -216,7 +219,7 @@ const Hero = () => {
                 <span className="item-label">Investor Room</span>
               </div>
             </div>
-            
+
             <div className="pop-wrapper pop-card-3">
               <div className="floating-item">
                 <div className="item-icon-wrapper">
@@ -227,7 +230,7 @@ const Hero = () => {
                 <span className="item-label">Event Coverage</span>
               </div>
             </div>
-            
+
             <div className="pop-wrapper pop-card-4">
               <div className="floating-item">
                 <div className="item-icon-wrapper">
